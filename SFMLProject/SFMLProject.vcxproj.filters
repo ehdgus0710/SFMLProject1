@@ -76,6 +76,9 @@
     <Filter Include="Core\6. Collision">
       <UniqueIdentifier>{d6fa543b-33b9-4d42-b3e9-bd1ce6ac07d3}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Contants">
+      <UniqueIdentifier>{e3a4225f-e6ec-434c-b808-11f0808d8347}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -155,6 +158,9 @@
     </ClCompile>
     <ClCompile Include="SceneDev2.cpp">
       <Filter>Core\5. Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="Test.cpp">
+      <Filter>Contants</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -241,6 +247,9 @@
     </ClInclude>
     <ClInclude Include="SceneDev2.h">
       <Filter>Core\5. Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="Test.h">
+      <Filter>Contants</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

@@ -6,7 +6,6 @@
 
 void Framework::Init()
 {
-    ResourcesManager<sf::Texture>::GetInstance().Load("Bee", "graphics/bee.png");
     renderWindow = WindowManager::GetInstance().GetRenderWindow();
 
     InputManager::GetInstance().Init();
@@ -29,6 +28,7 @@ void Framework::Update()
         }
 
         SceneManager::GetInstance().Update(TimeManager::GetInstance().GetDeletaTime());
+        ColliderManager::GetInstance().Update();
 
         renderWindow->clear();
         SceneManager::GetInstance().Render(*renderWindow);
