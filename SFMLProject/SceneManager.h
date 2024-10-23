@@ -14,7 +14,8 @@ public:
 	void Init();
 	void Release();
 
-	SceneIds GetCurrentScene() const { return currentScene; }
+	Scene* GetCurrentScene() { return sceneVec[(int)currentScene]; }
+	SceneIds GetCurrentSceneId() const { return currentScene; }
 	void ChangeScene(SceneIds id);
 
 	void Update(float dt);

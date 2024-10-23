@@ -3,11 +3,11 @@
 #include "SpriteGameObject.h"
 #include "UiTextGameObject.h"
 #include "Test.h"
+#include "Bullet.h"
 
 void SceneDev1::Init()
 {
 	GameObject* obj = AddGameObecjt(new SpriteGameObject("player"));
-
 
 	obj->SetOrigin(Origins::MiddleCenter);
 	obj->SetPosition({ 1920.f * 0.5f, 1080 * 0.5f });
