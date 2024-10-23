@@ -16,10 +16,12 @@ public:
 	void Init();
 
 	void UpdateEvent(const sf::Event* ev);
-	bool GetKeyDown(sf::Keyboard::Key key);
 
+	bool GetKeyDown(sf::Keyboard::Key key);
 	bool GetKey(sf::Keyboard::Key key);
 	bool GetKeyUp(sf::Keyboard::Key key);
+
+	void UpKeyClear();
 	void Clear();
 
 	const sf::Vector2i GetMousePosition() const;

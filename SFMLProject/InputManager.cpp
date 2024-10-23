@@ -1,6 +1,21 @@
 #include "stdafx.h"
 
-inline void InputManager::Clear()
+void InputManager::UpKeyClear()
+{
+	int size = keyUpVector.size();
+	for (int i = 0; i < size; ++i)
+	{
+		keyboardInputMap[keyUpVector[i]] = KeyState::KeyNone;
+	}
+	size = mouseUpVector.size();
+	for (int i = 0; i < size; ++i)
+	{
+		mouseInputMap[mouseUpVector[i]] = KeyState::KeyNone;
+	}
+	keyUpVector.clear();
+}
+
+void InputManager::Clear()
 {
 	keyboardInputMap.clear();
 	mouseInputMap.clear();
@@ -13,6 +28,8 @@ void InputManager::Init()
 	keyboardInputMap.insert({ sf::Keyboard::Right , KeyState::KeyNone });
 	keyboardInputMap.insert({ sf::Keyboard::Left , KeyState::KeyNone });
 	keyboardInputMap.insert({ sf::Keyboard::Z , KeyState::KeyNone });
+	keyboardInputMap.insert({ sf::Keyboard::Space , KeyState::KeyNone });
+	
 	//for (int i = 0; i < (int)KeyCode::end; ++i)
 	//{
 	//	//keyboardInputMap.insert({ (KeyCode)i , KeyState::KeyDown });
@@ -26,18 +43,6 @@ void InputManager::Init()
 
 void InputManager::UpdateEvent(const sf::Event* ev)
 {
-	int size = keyUpVector.size();
-	for (int i = 0; i < size; ++i)
-	{
-		keyboardInputMap[keyUpVector[i]] = KeyState::KeyNone;
-	}
-	size = mouseUpVector.size();
-	for (int i = 0; i < size; ++i)
-	{
-		mouseInputMap[mouseUpVector[i]] = KeyState::KeyNone;
-	}
-	keyUpVector.clear();
-
 	switch (ev->type)
 	{
 	case sf::Event::KeyPressed:
@@ -45,7 +50,7 @@ void InputManager::UpdateEvent(const sf::Event* ev)
 		auto iter = keyboardInputMap.find(ev->key.code);
 		if (iter != keyboardInputMap.end())
 		{
-			iter->second = KeyState::KeyUp == iter->second ? KeyState::KeyDown : KeyState::KeyPressed;
+			iter->second = KeyState::KeyPressed;
 		}
 		else
 			keyboardInputMap.insert({ ev->key.code , KeyState::KeyDown });
@@ -56,7 +61,6 @@ void InputManager::UpdateEvent(const sf::Event* ev)
 		keyboardInputMap[ev->key.code] = KeyState::KeyUp;
 		keyUpVector.push_back(ev->key.code);
 	}
-
 	break;
 	case sf::Event::MouseMoved:
 		mousePosition = sf::Mouse::getPosition(*WindowManager::GetInstance().GetRenderWindow());

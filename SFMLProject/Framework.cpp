@@ -9,21 +9,23 @@ void Framework::Init()
     renderWindow = WindowManager::GetInstance().GetRenderWindow();
 
     InputManager::GetInstance().Init();
+    ColliderManager::GetInstance().Init();
     SceneManager::GetInstance().Init();
     TimeManager::GetInstance().Init();
-    ColliderManager::GetInstance().Init();
 }
 
 void Framework::Update()
 {
     while (renderWindow->isOpen())
     {
+        InputManager::GetInstance().UpKeyClear();
         TimeManager::GetInstance().Update();
 
         while (renderWindow->pollEvent(event))
         {
             if (event.type == sf::Event::Closed)
                 renderWindow->close();
+
             InputManager::GetInstance().UpdateEvent(&event);
         }
 

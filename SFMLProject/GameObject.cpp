@@ -99,7 +99,7 @@ void GameObject::OnCollisionEnd(Collider* target)
 void GameObject::SetActive(const bool active)
 { 
 	this->active = active;
-	if (collider != nullptr && !active)
+	if (collider != nullptr)
 		collider->SetActive(active);
 }
 
