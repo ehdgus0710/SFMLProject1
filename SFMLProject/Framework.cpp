@@ -32,6 +32,7 @@ void Framework::Update()
 
         renderWindow->clear();
         SceneManager::GetInstance().Render(*renderWindow);
+        TimeManager::GetInstance().Render(*renderWindow);
         renderWindow->display();
     }
 

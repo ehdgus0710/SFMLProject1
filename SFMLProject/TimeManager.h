@@ -37,7 +37,6 @@ public:
 	void SetTimeScale(float newTimeScale) { timeScale = newTimeScale; }
 	void FrameCheck();
 
-
 protected:
 	TimeManager();
 	~TimeManager() override {}
