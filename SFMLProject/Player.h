@@ -7,7 +7,7 @@ private :
 	Stat stat;
 	sf::Sprite player;
 public:
-	Player(sf::Sprite player ,Stat stat, SpriteGameObject obj);
+	Player(sf::Sprite player ,Stat stat, const std::string& texId, const std::string& name = "");
 	virtual~Player() = default;
 
 	Stat Getstat() { return stat; };

@@ -1,8 +1,8 @@
 #include "stdafx.h"
 #include "Bullet.h"
 
-Bullet::Bullet(sf::Vector2f dir, float speed, SpriteGameObject obj)
-	:SpriteGameObject(obj),dir(dir),speed(speed)
+Bullet::Bullet(sf::Vector2f dir, float speed, const std::string& texId, const std::string& name = "")
+	:dir(dir),speed(speed),SpriteGameObject(name)
 {
 }
 

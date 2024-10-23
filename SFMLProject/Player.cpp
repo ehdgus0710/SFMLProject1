@@ -1,8 +1,8 @@
 #include "stdafx.h"
 #include "Player.h"
 
-Player::Player(sf::Sprite player,Stat stat, SpriteGameObject obj)
-	:SpriteGameObject(obj), stat(stat), player(player)
+Player::Player(sf::Sprite player,Stat stat, const std::string& texId, const std::string& name = "")
+	: stat(stat), player(player),SpriteGameObject(name)
 {
 }
 
@@ -60,9 +60,6 @@ void Player::Release()
 
 void Player::PlayerMove(float dt)
 {
-	if (InputManager::GetKeyDown)
-	{
-		
-	}
+
 	
 }

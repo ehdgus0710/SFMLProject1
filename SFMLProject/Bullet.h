@@ -6,7 +6,7 @@ private:
 	float speed;
 	sf::Vector2f dir;
 public:
-	Bullet(sf::Vector2f dir,float speed, SpriteGameObject obj);
+	Bullet(sf::Vector2f dir,float speed, const std::string& texId, const std::string& name = "");
 	virtual~Bullet() = default;
 	void SetPosition(const sf::Vector2f& pos) override;
 	void Render(sf::RenderWindow& renderWindow) override;
