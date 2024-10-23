@@ -1,7 +1,7 @@
 #include "stdafx.h"
 #include "Player.h"
 
-Player::Player(sf::Sprite player,Stat stat, const std::string& texId, const std::string& name = "")
+Player::Player(sf::Sprite player,Stat stat, const std::string& texId, const std::string& name)
 	: stat(stat), player(player),SpriteGameObject(name)
 {
 }
@@ -22,7 +22,7 @@ void Player::Render(sf::RenderWindow& renderWindow)
 
 void Player::Reset()
 {
-	sprite.setTexture(ResourcesManager<sf::Texture>::GetInstance().Get(" "));
+	sprite.setTexture(ResourcesManager<sf::Texture>::GetInstance().Get(textureId));
 	SetOrigin(originPreset);
 }
 
@@ -48,7 +48,7 @@ void Player::SetOrigin(const sf::Vector2f& newOrigin)
 
 void Player::Init()
 {
-	
+
 }
 
 void Player::Release()
@@ -58,8 +58,28 @@ void Player::Release()
 
 
 
-void Player::PlayerMove(float dt)
+void Player::PlayerMove(Stat st)
 {
+	if(InputManager::GetInstance().GetKeyDown(sf::Keyboard::Up))
+	{
+		sprite.move(sf::Vector2f::up*st.GetSpeed());
+	}
+	if (InputManager::GetInstance().GetKeyDown(sf::Keyboard::Down))
+	{
+		sprite.move(sf::Vector2f::down * st.GetSpeed());
+	}
+	if (InputManager::GetInstance().GetKeyDown(sf::Keyboard::Right))
+	{
+		sprite.move(sf::Vector2f::right * st.GetSpeed());
+	}
+	if (InputManager::GetInstance().GetKeyDown(sf::Keyboard::Left))
+	{
+		sprite.move(sf::Vector2f::left * st.GetSpeed());
+	}
 
+	if (InputManager::GetInstance().GetKeyDown(sf::Keyboard::Z))
+	{
+	
+	}
 	
 }

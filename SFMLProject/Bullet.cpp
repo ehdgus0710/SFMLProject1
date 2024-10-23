@@ -1,14 +1,15 @@
 #include "stdafx.h"
 #include "Bullet.h"
 
-Bullet::Bullet(sf::Vector2f dir, float speed, const std::string& texId, const std::string& name)
-	:dir(dir),speed(speed),SpriteGameObject(texId)
+Bullet::Bullet(Stat stat,sf::Vector2f dir, float speed, const std::string& texId, const std::string& name)
+	:stat(stat),dir(dir),speed(speed),SpriteGameObject(texId)
 {
 }
 
 Bullet::Bullet(const Bullet& other)
 	: dir(other.dir)
 	, speed(other.speed)
+	, stat(other.stat)
 	, SpriteGameObject(other.textureId, other.name)
 {
 }
@@ -45,4 +46,14 @@ void Bullet::SetOrigin(Origins preset)
 
 void Bullet::SetOrigin(const sf::Vector2f& newOrigin)
 {
+}
+
+void Bullet::UpMove()
+{
+	sprite.move(dir.up * GetBulletSpeed());
+}
+
+void Bullet::DownMove()
+{
+	sprite.move(dir.down * GetBulletSpeed());
 }
