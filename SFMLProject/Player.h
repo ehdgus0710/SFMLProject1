@@ -4,16 +4,23 @@
 class Player : public SpriteGameObject
 {
 private :
-	Stat stat;
+	Stat	playerStat;
+	sf::Vector2f direction;
+
+	float	currentReloadTime;
+	bool	isAttack;
+
 public:
 	Player(Stat stat, const std::string& texId, const std::string& name = "");
 	virtual~Player() = default;
 
-	Stat Getstat() { return stat; };
-	void Setstat(Stat st) { stat = st; };
+	Stat Getstat() { return playerStat; };
+	void Setstat(Stat st) { playerStat = st; };
 
+	void Update(const float& deltaTime) override;
 
-	void PlayerMove(Stat st);
+	void PlayerMove(float deltaTime);
+	void Attack();
 	
 
 };

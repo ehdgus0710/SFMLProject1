@@ -31,7 +31,7 @@ public:
 
 public:
 	const bool IsActive() const { return active; }
-	void SetActive(const bool active) { this->active = active; }
+	void SetActive(const bool active);
 	const std::string& GetName() const { return name; }
 	void SetName(const std::string& name) { this->name = name; }
 

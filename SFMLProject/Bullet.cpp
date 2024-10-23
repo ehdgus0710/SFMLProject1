@@ -1,13 +1,6 @@
 #include "stdafx.h"
 #include "Bullet.h"
 
-
-
-
-
-
-
-
 Bullet::Bullet(sf::Vector2f dir, float speed, const std::string& texId, const std::string& name)
 	:dir(dir),speed(speed),SpriteGameObject(texId)
 {
@@ -20,36 +13,18 @@ Bullet::Bullet(const Bullet& other)
 {
 }
 
-void Bullet::SetPosition(const sf::Vector2f& pos)
+Bullet::~Bullet()
 {
-}
-
-void Bullet::Render(sf::RenderWindow& renderWindow)
-{
-}
-
-void Bullet::Reset()
-{
-	sprite.setTexture(ResourcesManager<sf::Texture>::GetInstance().Get(" "));
-	SetOrigin(originPreset);
+	
 }
 
 void Bullet::Update(const float& deltaTime)
 {
-}
+	SetPosition(dir * deltaTime * speed + position);
 
-void Bullet::FixedUpdate(const float& deltaTime)
-{
-}
-
-void Bullet::LateUpdate(const float& deltaTime)
-{
-}
-
-void Bullet::SetOrigin(Origins preset)
-{
-}
-
-void Bullet::SetOrigin(const sf::Vector2f& newOrigin)
-{
+	if (position.x <= -10.f || position.x >= 1930.f
+		|| position.y <= -10.f || position.y >= 1100.f)
+	{
+		SetActive(false);
+	}
 }

@@ -1,51 +1,72 @@
 #include "stdafx.h"
 #include "Player.h"
 #include "Bullet.h"
+#include "BulletManager.h"
 
 Player::Player(Stat stat, const std::string& texId, const std::string& name)
-	: stat(stat),SpriteGameObject(texId)
-{
+	: playerStat(stat),SpriteGameObject(texId)
+	, currentReloadTime(0.f)
+	, isAttack(true)
 
+{
 }
 
-
-
-
-void Player::PlayerMove(Stat st)
+void Player::Update(const float& deltaTime)
 {
-	sf::Vector2f playerCenter = sf::Vector2f(sprite.getPosition().x / 2, sprite.getPosition().y / 2);
+	PlayerMove(deltaTime);
 
-	if(InputManager::GetInstance().GetKeyDown(sf::Keyboard::Up))
+	if (!isAttack)
 	{
-		sprite.setPosition(sprite.getPosition()*(sf::Vector2f::up*st.GetSpeed()));
+		currentReloadTime -= deltaTime;
+		isAttack = currentReloadTime <= 0.f ? true : false;
+	}
+
+	if (isAttack && InputManager::GetInstance().GetKeyUp(sf::Keyboard::Z))
+	{
+		Attack();
+	}
+}
+
+void Player::PlayerMove(float deltaTime)
+{
+	if (InputManager::GetInstance().GetKeyDown(sf::Keyboard::Up))
+	{
+		direction += sf::Vector2f::up;
 	}
 	if (InputManager::GetInstance().GetKeyDown(sf::Keyboard::Down))
 	{
-		sprite.setPosition(sprite.getPosition()*(sf::Vector2f::down *st.GetSpeed()));
+		direction += sf::Vector2f::down;
 	}
 	if (InputManager::GetInstance().GetKeyDown(sf::Keyboard::Right))
 	{
-		sprite.setPosition(sprite.getPosition() * (sf::Vector2f::right * st.GetSpeed()));
+		direction += sf::Vector2f::right;
 	}
 	if (InputManager::GetInstance().GetKeyDown(sf::Keyboard::Left))
 	{
-		sprite.setPosition(sprite.getPosition() * (sf::Vector2f::left * st.GetSpeed()));
+		direction += sf::Vector2f::left;
 	}
 
-	if (InputManager::GetInstance().GetKeyDown(sf::Keyboard::Z))
-	{
-		Bullet* b = new Bullet({ 0.f , 0.f }, 1.f, "");
-		b->SetPosition(playerCenter);
-		b->SetDir(sf::Vector2f::up);
-		b->SetBulletSpeed(b->GetBulletSpeed() * TimeManager::GetInstance().GetRealDeltatime());
+	if (direction.x == 0.f && direction.y == 0.f)
+		return;
 
-		if (WindowManager::GetInstance().GetResolutionSize().x < b->GetPosition().x ||
-			WindowManager::GetInstance().GetResolutionSize().y < b->GetPosition().y ||
-			b->GetPosition().x < 0 || b->GetPosition().y < 0)
-		{
-			delete b;
-		}
+	direction.Normalized();
+	position.x += direction.x + playerStat.GetSpeed() * deltaTime;
+	position.y += direction.y + playerStat.GetSpeed() * deltaTime;
 
+	SetPosition(position);
+	direction = sf::Vector2f::zero;
 
-	}
+}
+
+void Player::Attack()
+{
+	Bullet* bullet = BulletManager::GetInstance().GetBulletToAEnabled();
+	bullet->SetPosition(position);
+	bullet->Reset();
+	bullet->SetBulletSpeed(100.f);
+	bullet->SetDir(sf::Vector2f::up);
+	bullet->SetActive(true);
+
+	isAttack = false;
+	currentReloadTime = playerStat.attakSpeed;
 }

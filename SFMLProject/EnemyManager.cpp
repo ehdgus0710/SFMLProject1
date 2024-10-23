@@ -46,8 +46,10 @@ void EnemyManager::CreateEnemy(Scene* createScene, const std::string& name, int 
 {
 	for (int i = 0; i < count; ++i)
 	{
-		enemyMap.insert({ i, new Enemy(name, Stat( 3, 10.f, 3.f, 1 ) , std::to_string(createEnemyCount)) });
+		enemyMap.insert({ i, new Enemy(name, Stat( 3, 100.f, 3.f, 1 ) , std::to_string(createEnemyCount)) });
 		createScene->AddGameObject(enemyMap[createEnemyCount]);
+		enemyMap[createEnemyCount]->SetOrigin(Origins::MiddleCenter);
+		enemyMap[createEnemyCount]->CreateCollider(ColliderType::Circle);
 		enemyMap[createEnemyCount++]->SetActive(false);
 	}
 }

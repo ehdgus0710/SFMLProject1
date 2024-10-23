@@ -94,6 +94,13 @@ void GameObject::OnCollisionEnd(Collider* target)
 {
 }
 
+void GameObject::SetActive(const bool active)
+{ 
+	this->active = active;
+	if (collider != nullptr && !active)
+		collider->SetActive(active);
+}
+
 void GameObject::SetScale(const sf::Vector2f& scale)
 {
 	this->scale = scale;
@@ -103,8 +110,10 @@ bool GameObject::CreateCollider(ColliderType colliderType, sf::Vector2f offset, 
 {
 	if (collider == nullptr)
 	{
-		collider = new Collider(colliderType, offset, size * 100.f);
+		collider = new Collider(colliderType, offset, size);
+		collider->SetOwner(this);
 		collider->SetPosition(position);
+		collider->SetActive(false);
 		return true;
 	}
 

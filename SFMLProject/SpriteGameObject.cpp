@@ -1,5 +1,6 @@
 #include "stdafx.h"
 #include "SpriteGameObject.h"
+#include "Collider.h"
 
 
 SpriteGameObject::SpriteGameObject(const std::string& texId, const std::string& name)
@@ -27,6 +28,11 @@ void SpriteGameObject::Reset()
 {
 	sprite.setTexture(ResourcesManager<sf::Texture>::GetInstance().Get(textureId));
 	SetOrigin(originPreset);
+
+	if (collider != nullptr)
+	{
+		collider->SetScale((sf::Vector2f)sprite.getScale());
+	}
 }
 
 void SpriteGameObject::Update(const float& deltaTime)
@@ -61,4 +67,7 @@ void SpriteGameObject::SetScale(const sf::Vector2f& scale)
 {
 	sprite.setScale(scale);
 	GameObject::SetScale(scale);
+
+	if (collider != nullptr)
+		collider->SetScale(scale);
 }

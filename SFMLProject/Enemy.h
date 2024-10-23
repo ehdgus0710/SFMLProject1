@@ -8,12 +8,12 @@ class Bullet;
 class Enemy : public SpriteGameObject
 {
 private:
+	GameObject* player;
 	Stat enemyStat;
 	sf::Vector2f moveDirection;
-	Bullet* bulletPrefab;
 	float currentReloadTime;
-	GameObject* player;
-	
+
+	bool isAttack;
 
 public:
 	void Attack();

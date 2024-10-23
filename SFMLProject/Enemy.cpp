@@ -3,12 +3,15 @@
 #include "Bullet.h"
 #include "Player.h"
 #include "EnemyManager.h"
+#include "Collider.h"
+
+#include "BulletManager.h"
 
 Enemy::Enemy(const std::string& texId, Stat stat, const std::string& name)
 	: SpriteGameObject(texId, name)
 	, enemyStat(stat)
-	, bulletPrefab(nullptr)
 	, player(nullptr)
+	, isAttack(false)
 {
 	//bulletPrefab = new Bullet();
 
@@ -18,8 +21,6 @@ Enemy::Enemy(const std::string& texId, Stat stat, const std::string& name)
 
 Enemy::~Enemy()
 {
-	if(nullptr != bulletPrefab)
-		delete bulletPrefab;
 }
 
 void Enemy::Attack()
@@ -32,11 +33,23 @@ void Enemy::Attack()
 
 void Enemy::CreateBullet()
 {
-	//Bullet* bullet = new Bullet(*bulletPrefab);
-	//currentReloadTime = enemyStat.GetAttakSpeed();
-	//sf::Vector2f direction = GetPosition() - player->GetPosition();
-	//direction.Normalized();
-	//bullet->SetDir(direction);
+
+	for (int i = 0; i <= 10; i++)
+	{
+		Bullet* bullet = BulletManager::GetInstance().GetBulletToAEnabled();
+		//sf::Vector2f direction = GetPosition() - player->GetPosition();
+		//direction.Normalized();
+
+		sf::Vector2f direction{ cosf(36.f * (float)i) , sinf(36.f * (float)i) };
+		bullet->SetPosition(position);
+		bullet->SetDir(direction);
+		bullet->SetActive(true);
+		bullet->GetCollider()->SetActive(true);
+	}
+
+	
+
+	currentReloadTime = enemyStat.GetAttakSpeed();
 }
 
 void Enemy::DisableEnemy()
@@ -54,7 +67,7 @@ void Enemy::Update(const float& deltaTime)
 {
 	currentReloadTime -= deltaTime;
 
-	if (currentReloadTime <= 0.f)
+	if (!isAttack && currentReloadTime <= 0.f)
 		Attack();
 
 	position += moveDirection * enemyStat.GetSpeed() * deltaTime;

@@ -19,6 +19,7 @@ public:
 	sf::Vector2f GetPosition() { return position; }
 
 	virtual sf::Vector2f GetScale() const = 0;
+	virtual void SetScale(sf::Vector2f size);
 
 	const ColliderType GetColliderType() { return colliderType; }
 public:

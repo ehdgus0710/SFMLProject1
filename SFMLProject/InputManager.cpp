@@ -8,6 +8,11 @@ inline void InputManager::Clear()
 
 void InputManager::Init()
 {
+	keyboardInputMap.insert({ sf::Keyboard::Up , KeyState::KeyNone });
+	keyboardInputMap.insert({ sf::Keyboard::Down , KeyState::KeyNone });
+	keyboardInputMap.insert({ sf::Keyboard::Right , KeyState::KeyNone });
+	keyboardInputMap.insert({ sf::Keyboard::Left , KeyState::KeyNone });
+	keyboardInputMap.insert({ sf::Keyboard::Z , KeyState::KeyNone });
 	//for (int i = 0; i < (int)KeyCode::end; ++i)
 	//{
 	//	//keyboardInputMap.insert({ (KeyCode)i , KeyState::KeyDown });
@@ -75,7 +80,7 @@ void InputManager::UpdateEvent(const sf::Event* ev)
 
 bool InputManager::GetKeyDown(sf::Keyboard::Key key)
 {
-	return  keyboardInputMap[key] == KeyState::KeyDown;
+	return  keyboardInputMap[key] == KeyState::KeyPressed;
 }
 
 bool InputManager::GetKey(sf::Keyboard::Key key)

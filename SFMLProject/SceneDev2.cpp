@@ -3,8 +3,11 @@
 #include "SpriteGameObject.h"
 #include "UiTextGameObject.h"
 
+#include "BulletManager.h"
 #include "EnemyManager.h"
 #include "Background.h"
+
+#include "Player.h"
 
 void SceneDev2::BackgroundCreate()
 {
@@ -26,7 +29,7 @@ void SceneDev2::BackgroundCreate()
 
 void SceneDev2::Init()
 {
-	GameObject* obj = AddGameObecjt(new SpriteGameObject("Player"));
+	GameObject* obj = AddGameObecjt(new Player(Stat(5, 1.f, 5, 1), "Harrier"));
 
 
 	obj->SetOrigin(Origins::MiddleCenter);
@@ -37,12 +40,14 @@ void SceneDev2::Init()
 	obj->SetPosition({ });
 	((UITextGameObject*)obj)->SetString("SceneDev2");
 
-	BackgroundCreate();
+	//BackgroundCreate();
 
 	EnemyManager::GetInstance().Init();
 	EnemyManager::GetInstance().CreateEnemy(this,"Harrier", 50);
 	EnemyManager::GetInstance().SetPlayer(obj);
-	EnemyManager::GetInstance().SetCreateInfo({ 1920.f * 0.5f , -25.f }, 300, 5, 3);
+	EnemyManager::GetInstance().SetCreateInfo({ 1920.f * 0.5f , -25.f }, 300, 3.f, 1);
+
+	BulletManager::GetInstance().CreateBullet(this, "Bullet", 300);
 
 	Scene::Init();
 
@@ -53,6 +58,7 @@ void SceneDev2::Enter()
 
 	TEXTURE_MANAGER.Load("player", "graphics/player.png");
 	TEXTURE_MANAGER.Load("Harrier", "graphics/Harrier.png");
+	TEXTURE_MANAGER.Load("Bullet", "graphics/Bullet.png");
 
 	ResourcesManager<sf::Font>::GetInstance().Load("KOMIKAP", "fonts/KOMIKAP_.ttf");
 	Scene::Enter();
@@ -61,6 +67,8 @@ void SceneDev2::Enter()
 void SceneDev2::Exit()
 {
 	TEXTURE_MANAGER.unLoad("player");
+	TEXTURE_MANAGER.unLoad("Harrier");
+	TEXTURE_MANAGER.unLoad("Bullet");
 	ResourcesManager<sf::Font>::GetInstance().Load("KOMIKAP", "fonts/KOMIKAP_.ttf");
 	Scene::Exit();
 }

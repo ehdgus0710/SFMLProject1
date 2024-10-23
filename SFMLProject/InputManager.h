@@ -17,6 +17,7 @@ public:
 
 	void UpdateEvent(const sf::Event* ev);
 	bool GetKeyDown(sf::Keyboard::Key key);
+
 	bool GetKey(sf::Keyboard::Key key);
 	bool GetKeyUp(sf::Keyboard::Key key);
 	void Clear();

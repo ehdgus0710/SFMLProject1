@@ -1,213 +1,170 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <Filter Include="소스 파일">
-      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
-      <Extensions>cpp;c;cc;cxx;c++;cppm;ixx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
-    </Filter>
-    <Filter Include="헤더 파일">
-      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
-      <Extensions>h;hh;hpp;hxx;h++;hm;inl;inc;ipp;xsd</Extensions>
-    </Filter>
-    <Filter Include="리소스 파일">
-      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
-      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
-    </Filter>
-    <Filter Include="Manager">
-      <UniqueIdentifier>{cbb9e0a6-6624-4e04-835b-0c7ee13d6398}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Manager\1. Singleton">
-      <UniqueIdentifier>{7d2f06e4-5843-42c9-9145-4c902b01e58e}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Manager\4. TimeManager">
-      <UniqueIdentifier>{a29a16d0-0031-4b0e-927b-5e102c918f8b}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Manager\3. ResourcesManager">
-      <UniqueIdentifier>{ee12dc71-27b9-4bab-942a-c8d3b4d51134}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Manager\2. InputManager">
-      <UniqueIdentifier>{29e1335b-618f-4430-8a16-6607cdfd8653}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Core">
-      <UniqueIdentifier>{f2828a87-ba93-4592-a082-eb587de7f2b3}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Manager\EventManager">
-      <UniqueIdentifier>{4744bf83-38b2-49b5-87d9-4e69b57f8e02}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Manager\5. SceneManager">
-      <UniqueIdentifier>{5d357d44-568b-4b78-9601-eec285bb1b82}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Core\Utils">
-      <UniqueIdentifier>{42ae1fc0-c546-4d7b-aa1a-a72cf1c8dcc9}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Manager\6. ColliderManager">
-      <UniqueIdentifier>{6d72ffce-95d8-4075-a8cc-e41e777a23ae}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Manager\7. WindowManager">
-      <UniqueIdentifier>{8e589d71-a8af-4d2a-bce8-e56e50c5dd16}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Core\Object">
-      <UniqueIdentifier>{e6f70e50-bc42-4c8c-b753-49d6737d51b9}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Core\Object\UI">
-      <UniqueIdentifier>{3ca163a0-826a-44b2-9c7f-b72e53eed20d}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Core\Object\GameObject">
-      <UniqueIdentifier>{2bf2f865-c382-47d6-8da9-93b6060f9507}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Core\0. define">
-      <UniqueIdentifier>{9fd34642-d56e-4549-9d57-bb1c19c91e83}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Core\0. Framework">
-      <UniqueIdentifier>{62dfbdd2-5b33-457f-8bf7-7ada7d2ac1bd}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Core\1. Entity">
-      <UniqueIdentifier>{3594ac28-1dfb-46fb-9661-4e1dfbc195b1}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Core\2. KeyAction">
-      <UniqueIdentifier>{cce3386d-a812-44c1-8842-ee9d608a4eee}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Core\3. Resources">
-      <UniqueIdentifier>{0eb9f089-86ee-4ef3-b53d-a2b9dc4f54c5}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Core\5. Scene">
-      <UniqueIdentifier>{a88923db-d80c-40e0-a228-7c5f3e66d9b4}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Core\6. Collision">
-      <UniqueIdentifier>{d6fa543b-33b9-4d42-b3e9-bd1ce6ac07d3}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Contants">
-      <UniqueIdentifier>{e3a4225f-e6ec-434c-b808-11f0808d8347}</UniqueIdentifier>
-    </Filter>
-  </ItemGroup>
-  <ItemGroup>
-    <ClCompile Include="main.cpp">
-      <Filter>소스 파일</Filter>
+    <ClCompile Include="main.cpp" />
+    <ClCompile Include="Background.cpp">
+      <Filter>Contants\Background</Filter>
+    </ClCompile>
+    <ClCompile Include="BulletManager.cpp">
+      <Filter>Contants\Manager</Filter>
+    </ClCompile>
+    <ClCompile Include="Collision.cpp">
+      <Filter>Core\Collision</Filter>
+    </ClCompile>
+    <ClCompile Include="CollisionCircle.cpp">
+      <Filter>Core\Collision</Filter>
+    </ClCompile>
+    <ClCompile Include="CollisionPoint.cpp">
+      <Filter>Core\Collision</Filter>
+    </ClCompile>
+    <ClCompile Include="CollisionRectangle.cpp">
+      <Filter>Core\Collision</Filter>
+    </ClCompile>
+    <ClCompile Include="Collider.cpp">
+      <Filter>Core\Componet</Filter>
+    </ClCompile>
+    <ClCompile Include="EnemyManager.cpp">
+      <Filter>Contants\Manager</Filter>
+    </ClCompile>
+    <ClCompile Include="GameObject.cpp">
+      <Filter>Core\Object</Filter>
+    </ClCompile>
+    <ClCompile Include="Enemy.cpp">
+      <Filter>Contants\Enemy</Filter>
+    </ClCompile>
+    <ClCompile Include="Framework.cpp">
+      <Filter>Framework</Filter>
     </ClCompile>
     <ClCompile Include="InputManager.cpp">
-      <Filter>Manager\2. InputManager</Filter>
+      <Filter>Framework\Manager</Filter>
     </ClCompile>
-    <ClCompile Include="TimeManager.cpp">
-      <Filter>Manager\4. TimeManager</Filter>
-    </ClCompile>
-    <ClCompile Include="Entity.cpp">
-      <Filter>Core\1. Entity</Filter>
+    <ClCompile Include="ColliderManager.cpp">
+      <Filter>Framework\Manager\ColliderManager</Filter>
     </ClCompile>
     <ClCompile Include="Object.cpp">
       <Filter>Core\Object</Filter>
     </ClCompile>
-    <ClCompile Include="WindowManager.cpp">
-      <Filter>Manager\7. WindowManager</Filter>
+    <ClCompile Include="Player.cpp">
+      <Filter>Contants\Player</Filter>
     </ClCompile>
-    <ClCompile Include="Singleton.cpp">
-      <Filter>Manager\1. Singleton</Filter>
+    <ClCompile Include="SceneManager.cpp">
+      <Filter>Framework\Manager</Filter>
     </ClCompile>
-    <ClCompile Include="Framework.cpp">
-      <Filter>Core\0. Framework</Filter>
+    <ClCompile Include="SpriteGameObject.cpp">
+      <Filter>Core\Object</Filter>
     </ClCompile>
-    <ClCompile Include="Resources.cpp">
-      <Filter>Core\3. Resources</Filter>
+    <ClCompile Include="Utils.cpp">
+      <Filter>Utils</Filter>
     </ClCompile>
-    <ClCompile Include="KeyAction.cpp">
-      <Filter>Core\2. KeyAction</Filter>
+    <ClCompile Include="stdafx.cpp">
+      <Filter>Utils</Filter>
     </ClCompile>
-    <ClCompile Include="Collision.cpp">
-      <Filter>Core\6. Collision</Filter>
-    </ClCompile>
-    <ClCompile Include="CollisionCircle.cpp">
-      <Filter>Core\6. Collision</Filter>
-    </ClCompile>
-    <ClCompile Include="CollisionPoint.cpp">
-      <Filter>Core\6. Collision</Filter>
-    </ClCompile>
-    <ClCompile Include="CollisionRectangle.cpp">
-      <Filter>Core\6. Collision</Filter>
-    </ClCompile>
-    <ClCompile Include="Collider.cpp">
-      <Filter>Core\6. Collision</Filter>
-    </ClCompile>
-    <ClCompile Include="UITextGameObject.cpp">
-      <Filter>Core\Object\UI</Filter>
+    <ClCompile Include="Stat.cpp">
+      <Filter>Contants</Filter>
     </ClCompile>
     <ClCompile Include="UIGameObject.cpp">
       <Filter>Core\Object\UI</Filter>
     </ClCompile>
-    <ClCompile Include="Utils.cpp">
-      <Filter>Core\Utils</Filter>
-    </ClCompile>
-    <ClCompile Include="stdafx.cpp">
-      <Filter>Core\0. define</Filter>
-    </ClCompile>
-    <ClCompile Include="SceneManager.cpp">
-      <Filter>Manager\5. SceneManager</Filter>
-    </ClCompile>
-    <ClCompile Include="GameObject.cpp">
-      <Filter>Core\Object\GameObject</Filter>
-    </ClCompile>
-    <ClCompile Include="SpriteGameObject.cpp">
-      <Filter>Core\Object\GameObject</Filter>
+    <ClCompile Include="UITextGameObject.cpp">
+      <Filter>Core\Object\UI</Filter>
     </ClCompile>
     <ClCompile Include="Scene.cpp">
-      <Filter>Core\5. Scene</Filter>
-    </ClCompile>
-    <ClCompile Include="ColliderManager.cpp">
-      <Filter>Manager\6. ColliderManager</Filter>
+      <Filter>Core\Scene</Filter>
     </ClCompile>
     <ClCompile Include="SceneDev1.cpp">
-      <Filter>Core\5. Scene</Filter>
+      <Filter>Contants\Scene</Filter>
     </ClCompile>
     <ClCompile Include="SceneDev2.cpp">
-      <Filter>Core\5. Scene</Filter>
+      <Filter>Contants\Scene</Filter>
     </ClCompile>
     <ClCompile Include="Test.cpp">
       <Filter>Contants</Filter>
     </ClCompile>
+    <ClCompile Include="TimeManager.cpp">
+      <Filter>Framework\Manager</Filter>
+    </ClCompile>
+    <ClCompile Include="WindowManager.cpp">
+      <Filter>Framework\Manager</Filter>
+    </ClCompile>
+    <ClCompile Include="Singleton.cpp">
+      <Filter>Framework\Manager\Singleton</Filter>
+    </ClCompile>
+    <ClCompile Include="Entity.cpp">
+      <Filter>Core\Entity</Filter>
+    </ClCompile>
+    <ClCompile Include="KeyAction.cpp">
+      <Filter>Core\KeyInput</Filter>
+    </ClCompile>
+    <ClCompile Include="Resources.cpp">
+      <Filter>Core\Resources</Filter>
+    </ClCompile>
+    <ClCompile Include="Bullet.cpp">
+      <Filter>Contants\Bullet</Filter>
+    </ClCompile>
+    <ClCompile Include="EnemyBullet.cpp">
+      <Filter>Contants\Enemy</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Singleton.h">
-      <Filter>Manager\1. Singleton</Filter>
+    <ClInclude Include="Background.h">
+      <Filter>Contants\Background</Filter>
+    </ClInclude>
+    <ClInclude Include="BulletManager.h">
+      <Filter>Contants\Manager</Filter>
+    </ClInclude>
+    <ClInclude Include="Collision.h">
+      <Filter>Core\Collision</Filter>
+    </ClInclude>
+    <ClInclude Include="CollisionCircle.h">
+      <Filter>Core\Collision</Filter>
+    </ClInclude>
+    <ClInclude Include="CollisionPoint.h">
+      <Filter>Core\Collision</Filter>
+    </ClInclude>
+    <ClInclude Include="CollisionRectangle.h">
+      <Filter>Core\Collision</Filter>
+    </ClInclude>
+    <ClInclude Include="Collider.h">
+      <Filter>Core\Componet</Filter>
+    </ClInclude>
+    <ClInclude Include="EnemyManager.h">
+      <Filter>Contants\Manager</Filter>
+    </ClInclude>
+    <ClInclude Include="GameObject.h">
+      <Filter>Core\Object</Filter>
+    </ClInclude>
+    <ClInclude Include="Enemy.h">
+      <Filter>Contants\Enemy</Filter>
+    </ClInclude>
+    <ClInclude Include="Framework.h">
+      <Filter>Framework</Filter>
     </ClInclude>
     <ClInclude Include="InputManager.h">
-      <Filter>Manager\2. InputManager</Filter>
+      <Filter>Framework\Manager</Filter>
     </ClInclude>
-    <ClInclude Include="ResourcesManager.h">
-      <Filter>Manager\3. ResourcesManager</Filter>
-    </ClInclude>
-    <ClInclude Include="TimeManager.h">
-      <Filter>Manager\4. TimeManager</Filter>
-    </ClInclude>
-    <ClInclude Include="Entity.h">
-      <Filter>Core\1. Entity</Filter>
+    <ClInclude Include="ColliderManager.h">
+      <Filter>Framework\Manager\ColliderManager</Filter>
     </ClInclude>
     <ClInclude Include="Object.h">
       <Filter>Core\Object</Filter>
     </ClInclude>
-    <ClInclude Include="WindowManager.h">
-      <Filter>Manager\7. WindowManager</Filter>
+    <ClInclude Include="Player.h">
+      <Filter>Contants\Player</Filter>
     </ClInclude>
-    <ClInclude Include="Framework.h">
-      <Filter>Core\0. Framework</Filter>
+    <ClInclude Include="SceneManager.h">
+      <Filter>Framework\Manager</Filter>
     </ClInclude>
-    <ClInclude Include="Resources.h">
-      <Filter>Core\3. Resources</Filter>
+    <ClInclude Include="SpriteGameObject.h">
+      <Filter>Core\Object</Filter>
     </ClInclude>
-    <ClInclude Include="KeyAction.h">
-      <Filter>Core\2. KeyAction</Filter>
+    <ClInclude Include="Utils.h">
+      <Filter>Utils</Filter>
     </ClInclude>
-    <ClInclude Include="CollisionPoint.h">
-      <Filter>Core\6. Collision</Filter>
+    <ClInclude Include="stdafx.h">
+      <Filter>Utils</Filter>
     </ClInclude>
-    <ClInclude Include="Collision.h">
-      <Filter>Core\6. Collision</Filter>
-    </ClInclude>
-    <ClInclude Include="CollisionCircle.h">
-      <Filter>Core\6. Collision</Filter>
-    </ClInclude>
-    <ClInclude Include="CollisionRectangle.h">
-      <Filter>Core\6. Collision</Filter>
-    </ClInclude>
-    <ClInclude Include="Collider.h">
-      <Filter>Core\6. Collision</Filter>
+    <ClInclude Include="Stat.h">
+      <Filter>Contants</Filter>
     </ClInclude>
     <ClInclude Include="UITextGameObject.h">
       <Filter>Core\Object\UI</Filter>
@@ -215,41 +172,115 @@
     <ClInclude Include="UIGameObject.h">
       <Filter>Core\Object\UI</Filter>
     </ClInclude>
-    <ClInclude Include="Utils.h">
-      <Filter>Core\Utils</Filter>
-    </ClInclude>
-    <ClInclude Include="stdafx.h">
-      <Filter>Core\0. define</Filter>
-    </ClInclude>
-    <ClInclude Include="Core.h">
-      <Filter>Core\0. define</Filter>
-    </ClInclude>
-    <ClInclude Include="SceneManager.h">
-      <Filter>Manager\5. SceneManager</Filter>
-    </ClInclude>
-    <ClInclude Include="GameObject.h">
-      <Filter>Core\Object\GameObject</Filter>
-    </ClInclude>
-    <ClInclude Include="SpriteGameObject.h">
-      <Filter>Core\Object\GameObject</Filter>
-    </ClInclude>
     <ClInclude Include="Scene.h">
-      <Filter>Core\5. Scene</Filter>
-    </ClInclude>
-    <ClInclude Include="ColliderManager.h">
-      <Filter>Manager\6. ColliderManager</Filter>
-    </ClInclude>
-    <ClInclude Include="Defines.h">
-      <Filter>Core\0. define</Filter>
-    </ClInclude>
-    <ClInclude Include="SceneDev1.h">
-      <Filter>Core\5. Scene</Filter>
+      <Filter>Core\Scene</Filter>
     </ClInclude>
     <ClInclude Include="SceneDev2.h">
-      <Filter>Core\5. Scene</Filter>
+      <Filter>Contants\Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="SceneDev1.h">
+      <Filter>Contants\Scene</Filter>
     </ClInclude>
     <ClInclude Include="Test.h">
       <Filter>Contants</Filter>
     </ClInclude>
+    <ClInclude Include="WindowManager.h">
+      <Filter>Framework\Manager</Filter>
+    </ClInclude>
+    <ClInclude Include="TimeManager.h">
+      <Filter>Framework\Manager</Filter>
+    </ClInclude>
+    <ClInclude Include="ResourcesManager.h">
+      <Filter>Framework\Manager</Filter>
+    </ClInclude>
+    <ClInclude Include="Singleton.h">
+      <Filter>Framework\Manager\Singleton</Filter>
+    </ClInclude>
+    <ClInclude Include="Core.h">
+      <Filter>Utils</Filter>
+    </ClInclude>
+    <ClInclude Include="Defines.h">
+      <Filter>Utils</Filter>
+    </ClInclude>
+    <ClInclude Include="Entity.h">
+      <Filter>Core\Entity</Filter>
+    </ClInclude>
+    <ClInclude Include="KeyAction.h">
+      <Filter>Core\KeyInput</Filter>
+    </ClInclude>
+    <ClInclude Include="Resources.h">
+      <Filter>Core\Resources</Filter>
+    </ClInclude>
+    <ClInclude Include="Bullet.h">
+      <Filter>Contants\Bullet</Filter>
+    </ClInclude>
+    <ClInclude Include="EnemyBullet.h">
+      <Filter>Contants\Enemy</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="Core">
+      <UniqueIdentifier>{033e2f02-face-4f4d-ae0b-ca2de4b3e82b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Contants">
+      <UniqueIdentifier>{ebd409ef-553e-4b75-bd8d-eab9e2646c31}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Contants\Manager">
+      <UniqueIdentifier>{4bb311d5-c9ed-4d60-b67c-7033d882eaf6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Contants\Enemy">
+      <UniqueIdentifier>{cd38ba38-804b-467c-b70e-769dc26d367c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Contants\Player">
+      <UniqueIdentifier>{4f305a05-d44e-4f9e-8f54-d5f6e11ff221}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Contants\Background">
+      <UniqueIdentifier>{0d68561e-5aad-4b1b-8b41-f0c528162c7d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Core\Collision">
+      <UniqueIdentifier>{f9666a47-0b21-4eec-829f-e30085da0ebe}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Core\Componet">
+      <UniqueIdentifier>{6f0f53b0-a0ab-4f85-a034-21bd7d0f93b8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Core\Object">
+      <UniqueIdentifier>{1d871b67-857d-4d2a-90f4-93b341a810c3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Framework">
+      <UniqueIdentifier>{d065ac36-9715-41e6-903a-c49b14455538}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Utils">
+      <UniqueIdentifier>{b3643b87-5a49-4984-bab1-9ecc8e9be81f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Core\Object\UI">
+      <UniqueIdentifier>{719557e9-bb90-44eb-a274-4f8e11c63f5b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Core\Scene">
+      <UniqueIdentifier>{7ccebcf9-8d74-4274-8cc2-f1bb785c4b69}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Contants\Scene">
+      <UniqueIdentifier>{a0343996-60f8-45b2-80ba-10f911f49b88}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Framework\Manager">
+      <UniqueIdentifier>{4485f072-c56c-477b-8d80-7b48d142cc90}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Framework\Manager\ColliderManager">
+      <UniqueIdentifier>{8e4bcf04-ae1d-4788-a522-2878c2bafbab}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Framework\Manager\Singleton">
+      <UniqueIdentifier>{de0f2bbf-095d-4041-a87b-7e5f69dd23e0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Core\Entity">
+      <UniqueIdentifier>{649e3e00-b793-4d89-99f4-c4e49f7368b2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Core\KeyInput">
+      <UniqueIdentifier>{99d9350c-4c17-450a-ae3e-f159944e44c6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Core\Resources">
+      <UniqueIdentifier>{097226e5-ec6d-4efd-a8e8-6ea8554301ce}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Contants\Bullet">
+      <UniqueIdentifier>{716e0225-56bb-43f3-be71-50d9afc68dc5}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
 </Project>

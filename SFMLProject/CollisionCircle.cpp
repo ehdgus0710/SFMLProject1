@@ -19,6 +19,7 @@ void CollisionCircle::Init()
 	collisionCircle.setFillColor(sf::Color::Transparent);
 	collisionCircle.setOutlineColor(sf::Color::Green);
 	collisionCircle.setOutlineThickness(1);
+	collisionCircle.setRadius(radian);
 	collisionCircle.setOrigin({ radian, radian });
 }
 
@@ -41,4 +42,9 @@ void CollisionCircle::SetPosition(const sf::Vector2f& pos)
 {
 	collisionCircle.setPosition(pos);
 	Collision::SetPosition(pos);
+}
+
+void CollisionCircle::SetScale(sf::Vector2f size)
+{
+	collisionCircle.setRadius(size.x / 2.f);
 }
