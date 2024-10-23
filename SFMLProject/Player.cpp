@@ -8,7 +8,7 @@ Player::Player(Staitus staitus, SpriteGameObject obj)
 
 void Player::SetPosition(const sf::Vector2f& pos)
 {
-	
+	sprite.setPosition(pos);
 }
 
 void Player::Render(sf::RenderWindow& renderWindow)
