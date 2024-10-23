@@ -21,6 +21,18 @@ void InputManager::Init()
 
 void InputManager::UpdateEvent(const sf::Event* ev)
 {
+	int size = keyUpVector.size();
+	for (int i = 0; i < size; ++i)
+	{
+		keyboardInputMap[keyUpVector[i]] = KeyState::KeyNone;
+	}
+	size = mouseUpVector.size();
+	for (int i = 0; i < size; ++i)
+	{
+		mouseInputMap[mouseUpVector[i]] = KeyState::KeyNone;
+	}
+	keyUpVector.clear();
+
 	switch (ev->type)
 	{
 	case sf::Event::KeyPressed:
@@ -37,6 +49,7 @@ void InputManager::UpdateEvent(const sf::Event* ev)
 	case sf::Event::KeyReleased:
 	{
 		keyboardInputMap[ev->key.code] = KeyState::KeyUp;
+		keyUpVector.push_back(ev->key.code);
 	}
 
 	break;

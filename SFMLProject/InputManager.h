@@ -7,6 +7,9 @@ private:
 	std::unordered_map<sf::Keyboard::Key, KeyState> keyboardInputMap;
 	std::unordered_map<sf::Mouse::Button, KeyState> mouseInputMap;
 	//std::unordered_map<, KeyState> mouseInputMap;
+
+	std::vector<sf::Keyboard::Key> keyUpVector;
+	std::vector<sf::Mouse::Button> mouseUpVector;
 	sf::Vector2i mousePosition;
 
 public:
