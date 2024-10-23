@@ -1,9 +1,10 @@
 #pragma once
 #include "SpriteGameObject.h"
+#include "Stat.h"
 class Bullet : public SpriteGameObject
 {
 private:
-	float speed;
+	float speed =1.f;
 	sf::Vector2f dir;
 public:
 	Bullet(sf::Vector2f dir,float speed, const std::string& texId, const std::string& name = "");
@@ -22,7 +23,8 @@ public:
 	float GetBulletSpeed() { return speed; };
 	sf::Vector2f GetDir() { return dir; };
 
-	void SetBulletSpeed(float spd) { speed = spd; };
+	void SetBulletSpeed(float spd) { speed = spd; }
+	
 	void SetDir(sf::Vector2f d) { dir = d; };
 
 

@@ -1,85 +1,51 @@
 #include "stdafx.h"
 #include "Player.h"
+#include "Bullet.h"
 
-Player::Player(sf::Sprite player,Stat stat, const std::string& texId, const std::string& name)
-	: stat(stat), player(player),SpriteGameObject(name)
-{
-}
-
-void Player::SetPosition(const sf::Vector2f& pos)
-{
-	GameObject::SetPosition(pos);
-	sprite.setPosition(pos);
-}
-
-void Player::Render(sf::RenderWindow& renderWindow)
-{
-	GameObject::Render(renderWindow);
-	renderWindow.draw(sprite);
-	
-	
-}
-
-void Player::Reset()
-{
-	sprite.setTexture(ResourcesManager<sf::Texture>::GetInstance().Get(textureId));
-	SetOrigin(originPreset);
-}
-
-void Player::Update(const float& deltaTime)
-{
-}
-
-void Player::FixedUpdate(const float& deltaTime)
-{
-}
-
-void Player::LateUpdate(const float& deltaTime)
-{
-}
-
-void Player::SetOrigin(Origins preset)
-{
-}
-
-void Player::SetOrigin(const sf::Vector2f& newOrigin)
-{
-}
-
-void Player::Init()
+Player::Player(Stat stat, const std::string& texId, const std::string& name)
+	: stat(stat),SpriteGameObject(texId)
 {
 
 }
 
-void Player::Release()
-{
-	
-}
 
 
 
 void Player::PlayerMove(Stat st)
 {
+	sf::Vector2f playerCenter = sf::Vector2f(sprite.getPosition().x / 2, sprite.getPosition().y / 2);
+
 	if(InputManager::GetInstance().GetKeyDown(sf::Keyboard::Up))
 	{
-		sprite.move(sf::Vector2f::up*st.GetSpeed());
+		sprite.setPosition(sprite.getPosition()*(sf::Vector2f::up*st.GetSpeed()));
 	}
 	if (InputManager::GetInstance().GetKeyDown(sf::Keyboard::Down))
 	{
-		sprite.move(sf::Vector2f::down * st.GetSpeed());
+		sprite.setPosition(sprite.getPosition()*(sf::Vector2f::down *st.GetSpeed()));
 	}
 	if (InputManager::GetInstance().GetKeyDown(sf::Keyboard::Right))
 	{
-		sprite.move(sf::Vector2f::right * st.GetSpeed());
+		sprite.setPosition(sprite.getPosition() * (sf::Vector2f::right * st.GetSpeed()));
 	}
 	if (InputManager::GetInstance().GetKeyDown(sf::Keyboard::Left))
 	{
-		sprite.move(sf::Vector2f::left * st.GetSpeed());
+		sprite.setPosition(sprite.getPosition() * (sf::Vector2f::left * st.GetSpeed()));
 	}
 
 	if (InputManager::GetInstance().GetKeyDown(sf::Keyboard::Z))
 	{
-	
+		Bullet* b = new Bullet({ 0.f , 0.f }, 1.f, "");
+		b->SetPosition(playerCenter);
+		b->SetDir(sf::Vector2f::up);
+		b->SetBulletSpeed(b->GetBulletSpeed() * TimeManager::GetInstance().GetRealDeltatime());
+
+		if (WindowManager::GetInstance().GetResolutionSize().x < b->GetPosition().x ||
+			WindowManager::GetInstance().GetResolutionSize().y < b->GetPosition().y ||
+			b->GetPosition().x < 0 || b->GetPosition().y < 0)
+		{
+			delete b;
+		}
+
+
 	}
-	
 }
