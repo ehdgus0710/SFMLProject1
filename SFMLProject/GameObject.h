@@ -46,6 +46,9 @@ public:
 		originPreset = Origins::Custom;
 	}
 
+	virtual void SetScale(const sf::Vector2f& scale);
+	virtual sf::Vector2f GetScale() { return scale; }
+
 
 	virtual bool CreateCollider(ColliderType colliderType, sf::Vector2f offset = sf::Vector2f::zero, sf::Vector2f size = sf::Vector2f::one);
 	Collider* GetCollider() { return collider; }

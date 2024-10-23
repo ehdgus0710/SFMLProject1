@@ -6,6 +6,7 @@ SpriteGameObject::SpriteGameObject(const std::string& texId, const std::string& 
 	:textureId(texId)
 	, GameObject(name)
 {
+	scale = sprite.getScale();
 }
 
 
@@ -54,4 +55,10 @@ void SpriteGameObject::SetOrigin(const sf::Vector2f& newOrigin)
 	originPreset = Origins::Custom;
 	origin = newOrigin;
 	sprite.setOrigin(origin);
+}
+
+void SpriteGameObject::SetScale(const sf::Vector2f& scale)
+{
+	sprite.setScale(scale);
+	GameObject::SetScale(scale);
 }

@@ -4,6 +4,9 @@
 class SceneDev2 : public Scene
 {
 public:
+	void BackgroundCreate();
+
+public:
 	void Init() override;
 	void Enter() override;
 	void Exit() override;

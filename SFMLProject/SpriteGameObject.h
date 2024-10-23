@@ -17,6 +17,8 @@ public:
 	void LateUpdate(const float& deltaTime) override;
 	void SetOrigin(Origins preset) override;
 	void SetOrigin(const sf::Vector2f& newOrigin) override;
+
+	virtual void SetScale(const sf::Vector2f& scale);
 public:
 	SpriteGameObject(const std::string& texId, const std::string& name = "");
 	virtual ~SpriteGameObject() = default;

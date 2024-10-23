@@ -4,6 +4,25 @@
 #include "UiTextGameObject.h"
 
 #include "EnemyManager.h"
+#include "Background.h"
+
+void SceneDev2::BackgroundCreate()
+{
+	GameObject* backGround = AddGameObecjt(new Background("Map", "Map1"));
+	backGround->SetOrigin(Origins::MiddleCenter);
+
+	TEXTURE_MANAGER.Load("Map", "graphics/MapTile.png");
+	auto size = TEXTURE_MANAGER.Get("Map").getSize();
+
+	backGround->SetPosition({ 1920.f * 0.5f, size.y * -0.5f });
+	backGround->SetScale({ 10.0f, 1.f });
+
+	backGround = AddGameObecjt(new Background("Map", "Map2"));
+	backGround->SetOrigin(Origins::MiddleCenter);
+	backGround->SetPosition({ 1920.f * 0.5f, size.y * 0.5f });
+	backGround->SetScale({ 10.0f, 1.f });
+
+}
 
 void SceneDev2::Init()
 {
@@ -18,6 +37,7 @@ void SceneDev2::Init()
 	obj->SetPosition({ });
 	((UITextGameObject*)obj)->SetString("SceneDev2");
 
+	BackgroundCreate();
 
 	EnemyManager::GetInstance().Init();
 	EnemyManager::GetInstance().CreateEnemy(this,"Harrier", 50);
