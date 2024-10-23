@@ -1,6 +1,11 @@
 #include "stdafx.h"
 #include "Bullet.h"
 
+Bullet::Bullet(sf::Vector2f dir, float speed, SpriteGameObject obj)
+	:SpriteGameObject(obj),dir(dir),speed(speed)
+{
+}
+
 void Bullet::SetPosition(const sf::Vector2f& pos)
 {
 }
@@ -11,6 +16,8 @@ void Bullet::Render(sf::RenderWindow& renderWindow)
 
 void Bullet::Reset()
 {
+	sprite.setTexture(ResourcesManager<sf::Texture>::GetInstance().Get(" "));
+	SetOrigin(originPreset);
 }
 
 void Bullet::Update(const float& deltaTime)

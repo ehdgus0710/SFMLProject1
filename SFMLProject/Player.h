@@ -1,13 +1,17 @@
 #pragma once
 #include "SpriteGameObject.h"
-#include "Staitus.h"
+#include "Stat.h"
 class Player : public SpriteGameObject
 {
 private :
-	Staitus staitus;
+	Stat stat;
+	sf::Sprite player;
 public:
-	Player(Staitus staitus, SpriteGameObject obj);
+	Player(sf::Sprite player ,Stat stat, SpriteGameObject obj);
 	virtual~Player() = default;
+
+	Stat Getstat() { return stat; };
+	void Setstat(Stat st) { stat = st; };
 
 	void SetPosition(const sf::Vector2f& pos) override;
 	void Render(sf::RenderWindow& renderWindow) override;
@@ -18,6 +22,10 @@ public:
 	void LateUpdate(const float& deltaTime) override;
 	void SetOrigin(Origins preset) override;
 	void SetOrigin(const sf::Vector2f& newOrigin) override;
+
+	void Init() override;
+	void Release() override;
+
 
 	void PlayerMove(float dt);
 	
