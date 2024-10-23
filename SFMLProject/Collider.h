@@ -10,6 +10,7 @@ private:
 	sf::Vector2f colliderScale;
 	sf::Vector2f position;
 	Collision* collision;
+	GameObject* owner;
 
 	uint64_t	iD;
 	int			collisionCount;
@@ -30,6 +31,7 @@ public:
 	sf::Vector2f GetScale();
 
 public:
+	void SetOwner(GameObject* owner) { this->owner = owner; }
 	void CreateCollision(ColliderType colliderType, sf::Vector2f offset = sf::Vector2f::zero, sf::Vector2f size = sf::Vector2f::one);
 
 	virtual void Render(sf::RenderWindow& renderWindow);

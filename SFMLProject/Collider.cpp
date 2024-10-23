@@ -63,15 +63,18 @@ void Collider::Render(sf::RenderWindow& renderWindow)
 void Collider::OnCollisionEnter(Collider* target)
 {
 	collision->IsCollision();
+	owner->OnCollisionEnter(target);
 }
 
 void Collider::OnCollisionStay(Collider* target)
 {
+	owner->OnCollisionStay(target);
 }
 
 void Collider::OnCollisionEnd(Collider* target)
 {
 	collision->EndCollision();
+	owner->OnCollisionEnd(target);
 }
 
 ColliderType Collider::GetColliderType()

@@ -25,6 +25,10 @@ public:
 	void LateUpdate(const float& deltaTime) override;
 	virtual void Render(sf::RenderWindow& renderWindow);
 
+	virtual void OnCollisionEnter(Collider* target);
+	virtual void OnCollisionStay(Collider* target);
+	virtual void OnCollisionEnd(Collider* target);
+
 public:
 	const bool IsActive() const { return active; }
 	void SetActive(const bool active) { this->active = active; }

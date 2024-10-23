@@ -82,6 +82,18 @@ void GameObject::Render(sf::RenderWindow& renderWindow)
 		collider->Render(renderWindow);
 }
 
+void GameObject::OnCollisionEnter(Collider* target)
+{
+}
+
+void GameObject::OnCollisionStay(Collider* target)
+{
+}
+
+void GameObject::OnCollisionEnd(Collider* target)
+{
+}
+
 bool GameObject::CreateCollider(ColliderType colliderType, sf::Vector2f offset, sf::Vector2f size)
 {
 	if (collider == nullptr)
