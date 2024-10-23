@@ -21,6 +21,11 @@ Collider::~Collider()
 		delete collision;
 }
 
+void Collider::SetOrigin(sf::Vector2f origin)
+{
+	collision->SetOrigin(origin);
+}
+
 void Collider::SetPosition(sf::Vector2f pos)
 {
 	position = pos + offsetPosition;
@@ -52,6 +57,7 @@ void Collider::CreateCollision(ColliderType colliderType, ColliderLayer layer, s
 		collision = new CollisionPoint();
 
 	offsetPosition = offset;
+	collision->SetOwner(this);
 	ColliderManager::GetInstance().AddCollider(this, layer);
 }
 

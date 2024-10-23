@@ -39,6 +39,7 @@ public:
 	void SetSize(sf::Vector2f size);
 	sf::Vector2f GetScale() const override { return rectanleRender.getSize(); }
 	void SetPosition(const sf::Vector2f& pos) override;
+	void SetOrigin(const sf::Vector2f& origin) override;
 
 	sf::Vector2f GetLeftTopPosition() { return { position.x + rectanglePosition.leftPosition , position.y + rectanglePosition.topPosition }; }
 	sf::Vector2f GetRightBottomPosition() { return { position.x + rectanglePosition.rightPosition , position.y + rectanglePosition.bottomPosition }; }

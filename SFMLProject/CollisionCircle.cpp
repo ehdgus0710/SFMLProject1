@@ -1,6 +1,7 @@
 #include "stdafx.h"
 #include "CollisionCircle.h"
 
+#include "Collider.h"
 
 CollisionCircle::CollisionCircle(float radian)
 	: radian(radian)
@@ -20,7 +21,7 @@ void CollisionCircle::Init()
 	collisionCircle.setOutlineColor(sf::Color::Green);
 	collisionCircle.setOutlineThickness(1);
 	collisionCircle.setRadius(radian);
-	//collisionCircle.setOrigin({ radian, radian });
+	SetOrigin(originPosition);
 }
 
 void CollisionCircle::Update()
@@ -42,6 +43,16 @@ void CollisionCircle::SetPosition(const sf::Vector2f& pos)
 {
 	collisionCircle.setPosition(pos);
 	Collision::SetPosition(pos);
+}
+
+float CollisionCircle::GetRadian() const
+{
+	return collisionCircle.getRadius();
+}
+
+void CollisionCircle::SetOrigin(const sf::Vector2f& origin)
+{
+	collisionCircle.setOrigin(origin);
 }
 
 void CollisionCircle::SetScale(sf::Vector2f size)

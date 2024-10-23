@@ -21,6 +21,7 @@ void Collision::SetScale(sf::Vector2f size)
 Collision::Collision(ColliderType colliderType)
 	: colliderType(colliderType)
 	, collisionCount(0)
+	, ownerCollision(nullptr)
 {
 	//
 }

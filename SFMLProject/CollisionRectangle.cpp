@@ -20,7 +20,8 @@ void CollisionRectangle::Init()
 	rectanleRender.setFillColor(sf::Color::Transparent);
 	rectanleRender.setOutlineColor(sf::Color::Green);
 	rectanleRender.setOutlineThickness(1);
-	rectanleRender.setOrigin(rectangleSize * 0.5f);
+
+	SetOrigin(rectangleSize * 0.5f);
 	SetSize(rectangleSize);
 }
 
@@ -49,4 +50,9 @@ void CollisionRectangle::SetPosition(const sf::Vector2f& pos)
 {
 	rectanleRender.setPosition(pos);
 	Collision::SetPosition(pos);
+}
+
+void CollisionRectangle::SetOrigin(const sf::Vector2f& origin)
+{
+	rectanleRender.setOrigin(origin);
 }

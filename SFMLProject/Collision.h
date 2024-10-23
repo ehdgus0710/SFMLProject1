@@ -1,16 +1,23 @@
 #pragma once
 
+class Collider;
+
 class Collision
 {
 protected:
 	ColliderType colliderType;
+
+	Collider* ownerCollision;
 	sf::Vector2f position;
+	sf::Vector2f originPosition;
 
 	int collisionCount;
 public:
 	virtual void Init();
 	virtual void Update();
 	virtual void Render(sf::RenderWindow& renderWindow);
+
+	void SetOwner(Collider* owner) { ownerCollision = owner; }
 
 	void IsCollision() { ++collisionCount; }
 	void EndCollision() { --collisionCount; }

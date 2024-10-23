@@ -24,3 +24,7 @@ void CollisionPoint::SetPosition(const sf::Vector2f& pos)
 {
 	vertexPoint[0].position = pos;
 }
+
+void CollisionPoint::SetOrigin(const sf::Vector2f& origin)
+{
+}

@@ -24,8 +24,9 @@ public:
 	bool GetActive() const { return active; }
 	void SetActive(bool active) { this->active = active; }
 
-	void SetPosition(sf::Vector2f pos);
+	void SetOrigin(sf::Vector2f origin);
 
+	void SetPosition(sf::Vector2f pos);
 	void SetScale(sf::Vector2f size);
 	sf::Vector2f GetPosition();
 	sf::Vector2f GetScale();

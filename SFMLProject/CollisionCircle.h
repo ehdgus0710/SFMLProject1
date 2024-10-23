@@ -15,10 +15,10 @@ public:
 
 	void SetPosition(const sf::Vector2f& pos) override;
 	void SetRadian(float radian) { this->radian = radian; }
-	float GetRadian() const { return radian; }
+	float GetRadian() const;
 
 	sf::Vector2f GetScale() const override { return sf::Vector2f::one * radian; };
-	virtual void SetOrigin(const sf::Vector2f& origin);
+	void SetOrigin(const sf::Vector2f& origin) override;
 	void SetScale(sf::Vector2f size) override;
 
 public:

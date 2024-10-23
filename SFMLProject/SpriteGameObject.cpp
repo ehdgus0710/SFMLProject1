@@ -54,6 +54,9 @@ void SpriteGameObject::SetOrigin(Origins preset)
 {
 	originPreset = preset;
 	origin = Utils::SetOrigin(sprite, preset);
+
+	if (collider != nullptr)
+		collider->SetOrigin(origin);
 }
 
 void SpriteGameObject::SetOrigin(const sf::Vector2f& newOrigin)
@@ -61,6 +64,9 @@ void SpriteGameObject::SetOrigin(const sf::Vector2f& newOrigin)
 	originPreset = Origins::Custom;
 	origin = newOrigin;
 	sprite.setOrigin(origin);
+
+	if (collider != nullptr)
+		collider->SetOrigin(origin);
 }
 
 void SpriteGameObject::SetScale(const sf::Vector2f& scale)
