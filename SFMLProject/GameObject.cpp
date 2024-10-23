@@ -106,11 +106,11 @@ void GameObject::SetScale(const sf::Vector2f& scale)
 	this->scale = scale;
 }
 
-bool GameObject::CreateCollider(ColliderType colliderType, sf::Vector2f offset, sf::Vector2f size)
+bool GameObject::CreateCollider(ColliderType colliderType, ColliderLayer layer, sf::Vector2f offset, sf::Vector2f size)
 {
 	if (collider == nullptr)
 	{
-		collider = new Collider(colliderType, offset, size);
+		collider = new Collider(colliderType, layer, offset, size);
 		collider->SetOwner(this);
 		collider->SetPosition(position);
 		collider->SetActive(false);

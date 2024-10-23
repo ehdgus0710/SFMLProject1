@@ -6,13 +6,13 @@
 
 int Collider::globalCount = 0;
 
-Collider::Collider(ColliderType colliderType, sf::Vector2f offset, sf::Vector2f size)
+Collider::Collider(ColliderType colliderType, ColliderLayer layer, sf::Vector2f offset, sf::Vector2f size)
 	: active(true)
 	, collision(nullptr)
 	, collisionCount(0)
 	, iD(globalCount++)
 {
-	CreateCollision(colliderType, offset, size);
+	CreateCollision(colliderType, layer, offset, size);
 }
 
 Collider::~Collider()
@@ -42,7 +42,7 @@ void Collider::SetScale(sf::Vector2f size)
 	//collision->SetSize();
 }
 
-void Collider::CreateCollision(ColliderType colliderType, sf::Vector2f offset, sf::Vector2f size)
+void Collider::CreateCollision(ColliderType colliderType, ColliderLayer layer, sf::Vector2f offset, sf::Vector2f size)
 {
 	if (ColliderType::Rectangle == colliderType)
 		collision = new CollisionRectangle(size);
@@ -52,7 +52,7 @@ void Collider::CreateCollision(ColliderType colliderType, sf::Vector2f offset, s
 		collision = new CollisionPoint();
 
 	offsetPosition = offset;
-	ColliderManager::GetInstance().AddCollider(this);
+	ColliderManager::GetInstance().AddCollider(this, layer);
 }
 
 void Collider::Render(sf::RenderWindow& renderWindow)

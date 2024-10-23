@@ -50,8 +50,8 @@ void Player::PlayerMove(float deltaTime)
 		return;
 
 	direction.Normalized();
-	position.x += direction.x + playerStat.GetSpeed() * deltaTime;
-	position.y += direction.y + playerStat.GetSpeed() * deltaTime;
+	position.x += direction.x * playerStat.GetSpeed() * deltaTime;
+	position.y += direction.y * playerStat.GetSpeed() * deltaTime;
 
 	SetPosition(position);
 	direction = sf::Vector2f::zero;

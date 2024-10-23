@@ -15,7 +15,7 @@ void BulletManager::CreateBullet(Scene* createScene, const std::string& name, in
 		bulletMap.insert({ createBulletCount, new Bullet(sf::Vector2f::zero, 50.f, "Bullet",std::to_string(currentCreateIndex)) });
 		createScene->AddGameObject(bulletMap[createBulletCount]);
 
-		bulletMap[createBulletCount]->CreateCollider(ColliderType::Circle,sf::Vector2f::zero);
+		bulletMap[createBulletCount]->CreateCollider(ColliderType::Circle, ColliderLayer::EnemyBullet, sf::Vector2f::zero);
 		bulletMap[createBulletCount++]->SetActive(false);
 	}
 }

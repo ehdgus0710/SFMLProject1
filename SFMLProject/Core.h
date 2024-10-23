@@ -43,3 +43,14 @@ enum class Origins
 	BottomLeft, BottomCenter, BottomRight,
 	Custom
 };
+
+enum class ColliderLayer
+{
+	Player,
+	Enemy,
+	PlayerBullet,
+	EnemyBullet,
+
+
+	End
+};
