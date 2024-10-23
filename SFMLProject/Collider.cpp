@@ -39,7 +39,7 @@ sf::Vector2f Collider::GetScale()
 
 void Collider::SetScale(sf::Vector2f size)
 {
-	//collision->SetSize();
+	collision->SetScale(size);
 }
 
 void Collider::CreateCollision(ColliderType colliderType, ColliderLayer layer, sf::Vector2f offset, sf::Vector2f size)

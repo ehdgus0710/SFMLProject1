@@ -29,11 +29,13 @@ void SceneDev2::BackgroundCreate()
 
 void SceneDev2::Init()
 {
-	GameObject* obj = AddGameObecjt(new Player(Stat(5, 1.f, 5, 1), "Harrier"));
+	GameObject* obj = AddGameObecjt(new Player(Stat(5, 500.f, 5, 1), "Harrier"));
 
 
 	obj->SetOrigin(Origins::MiddleCenter);
 	obj->SetPosition({ 1920.f * 0.5f, 1080 * 0.5f });
+	obj->CreateCollider(ColliderType::Circle, ColliderLayer::Player);
+	obj->SetActive(true);
 
 	obj = AddGameObecjt(new UITextGameObject("KOMIKAP", "", 100));
 	obj->SetOrigin(Origins::TopLeft);
@@ -49,6 +51,8 @@ void SceneDev2::Init()
 
 	BulletManager::GetInstance().CreateBullet(this, "Bullet", 300);
 
+	ColliderManager::GetInstance().SetCollisionCheck(ColliderLayer::Player, ColliderLayer::EnemyBullet);
+	ColliderManager::GetInstance().SetCollisionCheck(ColliderLayer::PlayerBullet, ColliderLayer::Enemy);
 	Scene::Init();
 
 }

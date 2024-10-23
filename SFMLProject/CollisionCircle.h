@@ -18,6 +18,7 @@ public:
 	float GetRadian() const { return radian; }
 
 	sf::Vector2f GetScale() const override { return sf::Vector2f::one * radian; };
+	virtual void SetOrigin(const sf::Vector2f& origin);
 	void SetScale(sf::Vector2f size) override;
 
 public:

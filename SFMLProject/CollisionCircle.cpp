@@ -20,7 +20,7 @@ void CollisionCircle::Init()
 	collisionCircle.setOutlineColor(sf::Color::Green);
 	collisionCircle.setOutlineThickness(1);
 	collisionCircle.setRadius(radian);
-	collisionCircle.setOrigin({ radian, radian });
+	//collisionCircle.setOrigin({ radian, radian });
 }
 
 void CollisionCircle::Update()

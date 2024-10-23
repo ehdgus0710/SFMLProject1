@@ -43,6 +43,8 @@ void GameObject::SetOrigin(Origins preset)
 
 void GameObject::Init()
 {
+	if (collider != nullptr)
+		collider->SetActive(active);
 }
 
 void GameObject::Awake()

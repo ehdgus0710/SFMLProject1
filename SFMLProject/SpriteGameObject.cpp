@@ -31,7 +31,7 @@ void SpriteGameObject::Reset()
 
 	if (collider != nullptr)
 	{
-		collider->SetScale((sf::Vector2f)sprite.getScale());
+		collider->SetScale((sf::Vector2f)sprite.getTexture()->getSize());
 	}
 }
 
