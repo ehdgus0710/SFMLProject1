@@ -5,13 +5,26 @@
 #include "Test.h"
 #include "Bullet.h"
 
+void SceneDev1::ResourcesLoad()
+{
+	TEXTURE_MANAGER.Load("player", "graphics/player.png");
+	ResourcesManager<sf::Font>::GetInstance().Load("KOMIKAP", "fonts/KOMIKAP_.ttf");
+}
+
 void SceneDev1::Init()
+{
+	ResourcesLoad();
+
+	Scene::Init();
+}
+
+void SceneDev1::Enter()
 {
 	GameObject* obj = AddGameObecjt(new SpriteGameObject("player"));
 
 	obj->SetOrigin(Origins::MiddleCenter);
 	obj->SetPosition({ 1920.f * 0.5f, 1080 * 0.5f });
-	obj->CreateCollider(ColliderType::Circle, ColliderLayer::Player);
+	obj->CreateCollider(ColliderType::Rectangle, ColliderLayer::Player);
 
 	obj = AddGameObecjt(new UITextGameObject("fonts/KOMIKAP_.ttf", "", 100));
 	obj->SetOrigin(Origins::TopLeft);
@@ -21,23 +34,13 @@ void SceneDev1::Init()
 	Test* test = AddGameObecjt(new Test("player"));
 	test->CreateCollider(ColliderType::Rectangle, ColliderLayer::Player);
 
-
-	Scene::Init();
-}
-
-void SceneDev1::Enter()
-{
-	TEXTURE_MANAGER.Load("player", "graphics/player.png");
-
-
-	ResourcesManager<sf::Font>::GetInstance().Load("KOMIKAP", "fonts/KOMIKAP_.ttf");
 	Scene::Enter();
 }
 
 void SceneDev1::Exit()
 {
 	TEXTURE_MANAGER.unLoad("player");
-	ResourcesManager<sf::Font>::GetInstance().Load("KOMIKAP", "fonts/KOMIKAP_.ttf");
+	ColliderManager::GetInstance().Release();
 	Scene::Exit();
 }
 

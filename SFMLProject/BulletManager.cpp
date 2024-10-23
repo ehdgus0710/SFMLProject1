@@ -57,11 +57,14 @@ Bullet* BulletManager::GetBulletToAEnabled()
 
 void BulletManager::Release()
 {
+	auto currentScene = SceneManager::GetInstance().GetCurrentScene();
 	for (int i = 0; i < createBulletCount; i++)
 	{
+		currentScene->RemoveGameObject(bulletMap[i]);
 		delete bulletMap[i];
 		bulletMap[i] = nullptr;
 	}
-
+	currentCreateIndex = 0;
+	createBulletCount = 0;
 	bulletMap.clear();
 }

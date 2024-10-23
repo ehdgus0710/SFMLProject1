@@ -16,6 +16,8 @@ private:
 public:
 	void Init();
 	void Update();
+
+	void Release();
 	//bool isCo
 
 	void LayerCollision(int left, int right);

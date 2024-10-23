@@ -61,6 +61,10 @@ void Player::PlayerMove(float deltaTime)
 void Player::Attack()
 {
 	Bullet* bullet = BulletManager::GetInstance().GetBulletToAEnabled();
+
+	if (bullet != nullptr)
+		return;
+
 	bullet->SetPosition(position);
 	bullet->Reset();
 	bullet->SetBulletSpeed(100.f);

@@ -9,20 +9,21 @@
 
 ColliderManager::ColliderManager()
 {
-    colliderVector.resize((int)ColliderLayer::End);
+}
+
+void ColliderManager::Init()
+{
 
     collisionCheckVector.clear();
+    colliderVector.clear();
+
+    colliderVector.resize((int)ColliderLayer::End);
 
     collisionCheckVector.resize((int)ColliderLayer::End);
     for (int i = 0; i < (int)ColliderLayer::End; ++i)
     {
         collisionCheckVector[i].resize((int)ColliderLayer::End);
     }
-}
-
-void ColliderManager::Init()
-{
-   
 }
 
 void ColliderManager::Update()
@@ -38,6 +39,13 @@ void ColliderManager::Update()
         }
     }
 
+}
+
+void ColliderManager::Release()
+{
+    colliderVector.clear();
+    collisionCheckVector.clear();
+    Init();
 }
 
 void ColliderManager::LayerCollision(int left, int right)
@@ -99,20 +107,22 @@ bool ColliderManager::CheckCollision(Collider* left, Collider* right)
     {
         if (right->GetColliderType() == ColliderType::Rectangle)
             return IsRectToRectCollision(left, right);
-        else if (right->GetColliderType() == ColliderType::Circle)
-            return IsCircleToRectCollision(right, left);
-        else
-            return IsPointToRectCollision(right, left);
+        //else if (right->GetColliderType() == ColliderType::Circle)
+        //    return IsCircleToRectCollision(right, left);
+        //else
+        //    return IsPointToRectCollision(right, left);
 
     }
     else if (left->GetColliderType() == ColliderType::Circle)
     {
-        if (right->GetColliderType() == ColliderType::Rectangle)
-            return IsCircleToRectCollision(left, right);
-        else if (right->GetColliderType() == ColliderType::Circle)
+        if (right->GetColliderType() == ColliderType::Circle)
             return IsCircleToCircleCollision(left, right);
-        else
-            return IsCircleToPointCollision(left, right);
+        //if (right->GetColliderType() == ColliderType::Rectangle)
+        //    return IsCircleToRectCollision(left, right);
+        //else if (right->GetColliderType() == ColliderType::Circle)
+        //    return IsCircleToCircleCollision(left, right);
+        //else
+        //    return IsCircleToPointCollision(left, right);
     }
     else
     {

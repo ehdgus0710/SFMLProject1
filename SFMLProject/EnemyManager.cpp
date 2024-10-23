@@ -49,7 +49,7 @@ void EnemyManager::CreateEnemy(Scene* createScene, const std::string& name, int 
 		enemyMap.insert({ i, new Enemy(name, Stat( 3, 100.f, 3.f, 1 ) , std::to_string(createEnemyCount)) });
 		createScene->AddGameObject(enemyMap[createEnemyCount]);
 		enemyMap[createEnemyCount]->SetOrigin(Origins::MiddleCenter);
-		enemyMap[createEnemyCount]->CreateCollider(ColliderType::Circle, ColliderLayer::Enemy);
+		enemyMap[createEnemyCount]->CreateCollider(ColliderType::Circle, ColliderLayer::Enemy, sf::Vector2f::zero,sf::Vector2f::one * 0.5f);
 		enemyMap[createEnemyCount++]->SetActive(false);
 	}
 }
@@ -96,12 +96,22 @@ void EnemyManager::SetPlayer(GameObject* player)
 
 void EnemyManager::Release()
 {
+	auto currentScene = SceneManager::GetInstance().GetCurrentScene();
+
 	for (int i = 0; i < createEnemyCount; i++)
 	{
+		currentScene->RemoveGameObject(enemyMap[i]);
 		delete enemyMap[i];
 		enemyMap[i] = nullptr;
 	}
 
+
+	createEnemyCount = 0;
+	currentCreateIndex = 0;
+	currentCreateTime = 0.f;
+	respawnCount = 0;
+	player = nullptr;
+	
 	enemyMap.clear();
 }
 

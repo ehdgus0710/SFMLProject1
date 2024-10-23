@@ -18,7 +18,7 @@ TimeManager::TimeManager()
 
 void TimeManager::Init()
 {
-	ResourcesManager<sf::Font>::GetInstance().Load("KOMIKAP", "fonts/KOMIKAP_.ttf");
+	//ResourcesManager<sf::Font>::GetInstance().Load("KOMIKAP", "fonts/KOMIKAP_.ttf");
 	clock.restart();
 	frameText.setPosition({});
 	frameText.setFont(ResourcesManager<sf::Font>::GetInstance().Get("KOMIKAP"));
@@ -29,7 +29,7 @@ void TimeManager::Update()
 	sfTime = clock.restart();
 	realDeltatime = deltaTime = sfTime.asSeconds();
 	deltaTime *= timeScale;
-	realDeltatime += realDeltatime;
+	realTime += realDeltatime;
 	time += deltaTime;
 
 	FrameCheck();

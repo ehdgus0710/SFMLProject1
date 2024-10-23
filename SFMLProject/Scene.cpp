@@ -34,7 +34,7 @@ void Scene::Enter()
 
 void Scene::Exit()
 {
-	
+	Release();
 }
 
 void Scene::Update(float deltaTime)
