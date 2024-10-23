@@ -6,6 +6,7 @@ class TimeManager : public Singleton<TimeManager>
 private:
 	sf::Clock		clock;
 	sf::Time		sfTime;
+	sf::Text		frameText;
 
 	float			time;
 	float			realTime;
@@ -16,9 +17,13 @@ private:
 	float			fixedTime;
 	unsigned int	frameTarget;
 
+	unsigned int	currentFrame;
+	float			currentFrameTime;
+
 public:
 	void Init();
 	void Update();
+	void Render(sf::RenderWindow& renderWindow);
 
 	float GetUnScaleDeletaTime() const { return deltaTime; }
 	float GetUnScaleFixedDeletaTime() const { return fixedTime; }
@@ -30,6 +35,8 @@ public:
 	float GetTimeScale() const { return timeScale; }
 
 	void SetTimeScale(float newTimeScale) { timeScale = newTimeScale; }
+	void FrameCheck();
+
 
 protected:
 	TimeManager();
