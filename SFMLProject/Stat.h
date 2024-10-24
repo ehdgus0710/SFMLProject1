@@ -7,6 +7,7 @@ public:
 	float attakSpeed;
 	int damege;
 public:
+	Stat() = default;
 	Stat(int hp,float speed,float attakSpeed,int damege);
 	virtual ~Stat() = default;
 

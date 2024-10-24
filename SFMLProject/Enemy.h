@@ -26,6 +26,7 @@ public:
 
 public:
 	void Init() override;
+	void Reset() override;
 	void Update(const float& deltaTime) override;
 	void FixedUpdate(const float& deltaTime) override;
 	void LateUpdate(const float& deltaTime) override;

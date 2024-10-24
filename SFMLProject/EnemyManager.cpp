@@ -48,7 +48,7 @@ void EnemyManager::CreateEnemy(const std::string& name, int count)
 {
 	for (int i = 0; i < count; ++i)
 	{
-		enemyMap.insert({ i, new Enemy(name, Stat( 3, 100.f, 3.f, 1 ) , std::to_string(createEnemyCount)) });
+		enemyMap.insert({ i, new Enemy(name, enemyStat, std::to_string(createEnemyCount)) });
 		enemyMap[createEnemyCount]->SetOrigin(Origins::MiddleCenter);
 		enemyMap[createEnemyCount]->CreateCollider(ColliderType::Circle, ColliderLayer::Enemy, sf::Vector2f::zero,sf::Vector2f::one * 0.5f);
 		enemyMap[createEnemyCount++]->SetActive(false);
@@ -136,5 +136,6 @@ EnemyManager::EnemyManager()
 	, createPosition()
 	, createWidthRange(0)
 	, player(nullptr)
+	, enemyStat()
 {
 }

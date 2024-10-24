@@ -13,8 +13,6 @@ Enemy::Enemy(const std::string& texId, Stat stat, const std::string& name)
 	, player(nullptr)
 	, isAttack(false)
 {
-	//bulletPrefab = new Bullet();
-
 	currentReloadTime = enemyStat.GetAttakSpeed();
 	moveDirection = sf::Vector2f::down;
 }
@@ -77,6 +75,12 @@ void Enemy::Init()
 {
 	SpriteGameObject::Init();
 	player = EnemyManager::GetInstance().GetPlayer();	
+}
+
+void Enemy::Reset()
+{
+	SpriteGameObject::Reset();
+	enemyStat = EnemyManager::GetInstance().GetEnemyStat();
 }
 
 void Enemy::Update(const float& deltaTime)

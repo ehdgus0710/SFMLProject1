@@ -65,6 +65,7 @@ void SceneDev2::Enter()
 
 	EnemyManager::GetInstance().Init();
 	EnemyManager::GetInstance().SetPlayer(obj);
+	EnemyManager::GetInstance().SetEnemyStat(Stat(3, 100.f, 3.f, 1));
 	EnemyManager::GetInstance().CreateEnemy("Harrier", 50);
 	EnemyManager::GetInstance().SetCreateInfo({ 1920.f * 0.5f , -25.f }, 300, 3.f, 1);
 

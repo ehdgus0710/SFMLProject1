@@ -1,5 +1,7 @@
 #pragma once
 
+#include "Stat.h"
+
 class Enemy;
 
 class EnemyManager : public Singleton<EnemyManager>
@@ -8,17 +10,21 @@ class EnemyManager : public Singleton<EnemyManager>
 private:
 	std::unordered_map<int, Enemy*> enemyMap;
 
+	GameObject*		player;
+	sf::Vector2f	createPosition;
+	Stat			enemyStat;
 	float			respawnTime;
 	float			currentCreateTime;
 	int				respawnCount;
-	sf::Vector2f	createPosition;
 	int				createWidthRange;
-
-	GameObject*		player;
 	int				currentCreateIndex;
 	int				createEnemyCount;
 
+
 public:
+
+	void SetEnemyStat(Stat stat) { enemyStat = stat; }
+	Stat GetEnemyStat() { return enemyStat; }
 	void SetCreateInfo(const sf::Vector2f& createPos, int createWidthRange, float respawnTime, int createCount);
 	void SetRespawnCount(int count);
 	void SetRespawnTime(float time);
