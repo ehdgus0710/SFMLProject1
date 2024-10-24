@@ -13,6 +13,7 @@ Player::Player(Stat stat, const std::string& texId, const std::string& name)
 	, playerInvincibilityTime(0.5f)
 	, currentInvinciblityTime(0.f)
 	, isInvincibility(false)
+	, isCheat(false)
 {
 }
 
@@ -39,6 +40,11 @@ void Player::Update(const float& deltaTime)
 		}
 	}
 	
+	if (InputManager::GetInstance().GetKeyUp(sf::Keyboard::F1))
+	{
+		isCheat = !isCheat;
+	}
+
 	if (isAttack && InputManager::GetInstance().GetKeyDown(sf::Keyboard::Z))
 	{
 		Attack();
@@ -108,7 +114,7 @@ void Player::PlayerMove(float deltaTime)
 
 void Player::TakeAttack(int damage)
 {
-	if (isInvincibility)
+	if (isInvincibility || isCheat)
 		return;
 
 	playerStat.hp -= damage;

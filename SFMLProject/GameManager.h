@@ -8,6 +8,10 @@ class GameManager : public Singleton<GameManager>
 private:
 	Player* player;
 
+	sf::Text		victorytext;
+	sf::Text		gameoverText;
+	sf::Text		restartText;
+
 	int score;
 
 	bool isGameOver;
@@ -28,6 +32,8 @@ public:
 public:
 	void Init();
 	void Release();
+	void Render(sf::RenderWindow& window);
+
 
 protected:
 	GameManager();

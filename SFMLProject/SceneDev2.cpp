@@ -33,9 +33,10 @@ void SceneDev2::BackgroundCreate()
 
 void SceneDev2::ResourcesLoad()
 {
+	ResourcesManager<sf::Font>::GetInstance().Load("KOMIKAP", "fonts/KOMIKAP_.ttf");
 	TEXTURE_MANAGER.Load("Map", "graphics/MapTile.png");
 	TEXTURE_MANAGER.Load("player", "graphics/player.png");
-	TEXTURE_MANAGER.Load("Harrier", "graphics/Harrier.png");
+	TEXTURE_MANAGER.Load("Enemy", "graphics/Harrier.png");
 	TEXTURE_MANAGER.Load("Bullet", "graphics/Bullet.png");
 }
 
@@ -44,7 +45,7 @@ void SceneDev2::Init()
 	ResourcesLoad();
 
 	Scene::Init();
-
+	GameManager::GetInstance().Init();
 }
 
 void SceneDev2::Enter()
@@ -52,7 +53,7 @@ void SceneDev2::Enter()
 	ResourcesLoad();
 
 	BackgroundCreate();
-	GameObject* obj = AddGameObject(new Player(Stat(5, 500.f, 0.5f, 1), "Harrier"));
+	GameObject* obj = AddGameObject(new Player(Stat(5, 500.f, 0.5f, 1), "player"));
 
 	obj->SetOrigin(Origins::MiddleCenter);
 	obj->SetPosition({ 1920.f * 0.5f, 1080 * 0.5f });	
@@ -62,7 +63,7 @@ void SceneDev2::Enter()
 	EnemyManager::GetInstance().Init();
 	EnemyManager::GetInstance().SetPlayer(obj);
 	EnemyManager::GetInstance().SetEnemyStat(Stat(3, 100.f, 3.f, 1));
-	EnemyManager::GetInstance().CreateEnemy("Harrier", 50);
+	EnemyManager::GetInstance().CreateEnemy("Enemy", 50);
 	EnemyManager::GetInstance().SetCreateInfo({ 1920.f * 0.5f , -25.f }, 300, 3.f, 1);
 	
 	BulletManager::GetInstance().CreatePlayerBullet("Bullet", 100);
@@ -94,7 +95,7 @@ void SceneDev2::Enter()
 void SceneDev2::Exit()
 {
 	TEXTURE_MANAGER.unLoad("player");
-	TEXTURE_MANAGER.unLoad("Harrier");
+	TEXTURE_MANAGER.unLoad("Enemy");
 	TEXTURE_MANAGER.unLoad("Bullet");
 
 	EnemyManager::GetInstance().Release();
@@ -116,22 +117,18 @@ void SceneDev2::Update(float dt)
 	 
 	EnemyManager::GetInstance().Update(dt);
 
-	if ((GameManager::GetInstance().IsGameOver() || GameManager::GetInstance().IsClear()) &&  InputManager::GetInstance().GetKeyDown(sf::Keyboard::Space))
+	if ((GameManager::GetInstance().IsGameOver() || GameManager::GetInstance().IsClear()) &&  InputManager::GetInstance().GetKeyUp(sf::Keyboard::Space))
 	{
 		SCENE_MANAGER.ChangeScene(SceneIds::SceneDev2);
+		GameManager::GetInstance().Init();
 		TimeManager::GetInstance().SetTimeScale(1.f);
-	}
-
-	if (InputManager::GetInstance().GetKeyUp(sf::Keyboard::F11))
-	{
-		SCENE_MANAGER.ChangeScene(SceneIds::SceneDev2);
-		std::cout << "Input" << std::endl;
 	}
 }
 
 void SceneDev2::Render(sf::RenderWindow& window)
 {
 	Scene::Render(window);
+	GameManager::GetInstance().Render(window);
 }
 
 SceneDev2::SceneDev2()

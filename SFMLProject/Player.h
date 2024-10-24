@@ -15,6 +15,7 @@ private :
 	float			playerInvincibilityTime;
 	float			currentInvinciblityTime;
 
+	bool			isCheat;
 	bool			isInvincibility;
 	bool			isAttack;
 

@@ -52,6 +52,6 @@ void Timer::Render(sf::RenderWindow& renderWindow)
 void Timer::TimeOver()
 {
 	TimeManager::GetInstance().SetTimeScale(0);
-	text.setString("!VICTORY!");
+	GameManager::GetInstance().OnClear();
 }
    

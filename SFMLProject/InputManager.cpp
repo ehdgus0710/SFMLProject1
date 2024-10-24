@@ -27,8 +27,10 @@ void InputManager::Init()
 	keyboardInputMap.insert({ sf::Keyboard::Down , KeyState::KeyNone });
 	keyboardInputMap.insert({ sf::Keyboard::Right , KeyState::KeyNone });
 	keyboardInputMap.insert({ sf::Keyboard::Left , KeyState::KeyNone });
+	keyboardInputMap.insert({ sf::Keyboard::Space , KeyState::KeyNone });
 	keyboardInputMap.insert({ sf::Keyboard::Z , KeyState::KeyNone });
 	keyboardInputMap.insert({ sf::Keyboard::F11 , KeyState::KeyNone });
+	keyboardInputMap.insert({ sf::Keyboard::F1 , KeyState::KeyNone });
 	
 	//for (int i = 0; i < (int)KeyCode::end; ++i)
 	//{
