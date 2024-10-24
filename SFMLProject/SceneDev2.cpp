@@ -50,6 +50,7 @@ void SceneDev2::Enter()
 	ResourcesLoad();
 
 	GameObject* obj = AddGameObecjt(new Player(Stat(5, 500.f, 5, 1), "Harrier"));
+
 	obj->SetOrigin(Origins::MiddleCenter);
 	obj->SetPosition({ 1920.f * 0.5f, 1080 * 0.5f });
 	obj->CreateCollider(ColliderType::Circle, ColliderLayer::Player);
@@ -63,15 +64,15 @@ void SceneDev2::Enter()
 	//BackgroundCreate();
 
 	EnemyManager::GetInstance().Init();
-	EnemyManager::GetInstance().CreateEnemy(this, "Harrier", 50);
 	EnemyManager::GetInstance().SetPlayer(obj);
+	EnemyManager::GetInstance().CreateEnemy(this, "Harrier", 50);
 	EnemyManager::GetInstance().SetCreateInfo({ 1920.f * 0.5f , -25.f }, 300, 3.f, 1);
 
-	//BulletManager::GetInstance().CreateBullet(this, "Bullet", 300);
+	BulletManager::GetInstance().CreateBullet(this, "Bullet", 300);
 
-	//ColliderManager::GetInstance().SetCollisionCheck(ColliderLayer::Player, ColliderLayer::EnemyBullet);
+	ColliderManager::GetInstance().SetCollisionCheck(ColliderLayer::Player, ColliderLayer::EnemyBullet);
 	ColliderManager::GetInstance().SetCollisionCheck(ColliderLayer::Player, ColliderLayer::Enemy);
-	//ColliderManager::GetInstance().SetCollisionCheck(ColliderLayer::PlayerBullet, ColliderLayer::Enemy);
+	ColliderManager::GetInstance().SetCollisionCheck(ColliderLayer::PlayerBullet, ColliderLayer::Enemy);
 
 	Scene::Enter();
 }
@@ -100,11 +101,11 @@ void SceneDev2::Update(float dt)
 
 	EnemyManager::GetInstance().Update(dt);
 
-	/*if (InputManager::GetInstance().GetKeyUp(sf::Keyboard::Space))
+	if (InputManager::GetInstance().GetKeyUp(sf::Keyboard::F11))
 	{
 		SCENE_MANAGER.ChangeScene(SceneIds::SceneDev1);
 		std::cout << "Input" << std::endl;
-	}*/
+	}
 }
 
 void SceneDev2::Render(sf::RenderWindow& window)

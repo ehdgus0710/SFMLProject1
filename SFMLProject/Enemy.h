@@ -4,6 +4,7 @@
 #include "Stat.h"
 
 class Bullet;
+class Player;
 
 class Enemy : public SpriteGameObject
 {
@@ -19,6 +20,7 @@ public:
 	void Attack();
 	void CreateBullet();
 	void DisableEnemy();
+	void SetPlayer(GameObject* player);
 
 public:
 	void Init() override;

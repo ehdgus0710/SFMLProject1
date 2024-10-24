@@ -40,9 +40,6 @@ void Enemy::CreateBullet()
 		//sf::Vector2f direction = GetPosition() - player->GetPosition();
 		//direction.Normalized();
 
-		if (bullet == nullptr)
-			return;
-
 		sf::Vector2f direction{ cosf(36.f * (float)i) , sinf(36.f * (float)i) };
 		bullet->SetPosition(position);
 		bullet->SetDir(direction);
@@ -58,6 +55,11 @@ void Enemy::CreateBullet()
 void Enemy::DisableEnemy()
 {
 	SetActive(false);
+}
+
+void Enemy::SetPlayer(GameObject* player)
+{ 
+	this->player = player;
 }
 
 void Enemy::Init()

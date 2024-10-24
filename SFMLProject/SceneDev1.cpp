@@ -53,8 +53,8 @@ void SceneDev1::Update(float dt)
 {
 	Scene::Update(dt);
 
-	/*if (InputManager::GetInstance().GetKeyUp(sf::Keyboard::Space))
-		SCENE_MANAGER.ChangeScene(SceneIds::SceneDev2);*/
+	if (InputManager::GetInstance().GetKeyUp(sf::Keyboard::F11))
+		SCENE_MANAGER.ChangeScene(SceneIds::SceneDev2);
 }
 
 void SceneDev1::Render(sf::RenderWindow& window)

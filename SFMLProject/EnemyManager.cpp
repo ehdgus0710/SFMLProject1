@@ -34,6 +34,7 @@ void EnemyManager::RespwanEnemy()
 	for (int i = 0; i < respawnCount; ++i)
 	{
 		enemy = GetMonsterToAEnabled();
+		enemy->SetPlayer(player);
 		enemy->SetActive(true);
 		int createWidth = (rand() % createWidthRange) - createWidthRange / 2;
 		enemy->SetPosition({ createPosition.x + (float)createWidth, createPosition.y });
