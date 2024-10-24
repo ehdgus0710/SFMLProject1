@@ -67,11 +67,11 @@ void Player::PlayerMove(float deltaTime)
 
 	if (position.x > 1920.f)
 		position.x = 1920.f;
-	else if (position.x < 0.f)
+	if (position.x < 0.f)
 		position.x = 0.f;
-	else if (position.y > 1080.f)
+	if (position.y > 1080.f)
 		position.y = 1080.f;
-	else if (position.y < 0.f)
+	if (position.y < 0.f)
 		position.y = 0.f;
 	SetPosition(position);
 	direction = sf::Vector2f::zero;
