@@ -7,6 +7,7 @@ SpriteGameObject::SpriteGameObject(const std::string& texId, const std::string& 
 	:textureId(texId)
 	, GameObject(name)
 {
+	sprite.setTexture(ResourcesManager<sf::Texture>::GetInstance().Get(textureId));
 	scale = sprite.getScale();
 }
 
@@ -36,7 +37,8 @@ void SpriteGameObject::Reset()
 
 	if (collider != nullptr)
 	{
-		collider->SetScale((sf::Vector2f)sprite.getTexture()->getSize());
+		collider->SetScale((sf::Vector2f)sprite.getTexture()->getSize() * collider->GetScale());
+		collider->SetOrigin((sf::Vector2f)sprite.getTexture()->getSize() * collider->GetScale() *0.5f);
 	}
 }
 

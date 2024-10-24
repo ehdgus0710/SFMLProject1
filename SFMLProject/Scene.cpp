@@ -43,7 +43,7 @@ void Scene::Update(float deltaTime)
 	for (auto object : removeObjectVector)
 	{
 		object->SetActive(false);
-		object->SetDestory(false);
+		object->SetDestory(false); 
 		gameObjectList.remove(object);
 	}
 	removeObjectVector.clear();

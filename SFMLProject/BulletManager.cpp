@@ -109,14 +109,18 @@ void BulletManager::Release()
 	for (int i = 0; i < createEnemyBulletCount; i++)
 	{
 		currentScene->RemoveGameObject(enemyBulletMap[i]);
-		delete enemyBulletMap[i];
+
+		if (!enemyBulletMap[i]->IsActive())
+			delete enemyBulletMap[i];
 		enemyBulletMap[i] = nullptr;
 	}
 
-	for (int i = 0; i < createEnemyBulletCount; i++)
+	for (int i = 0; i < createPlayerBulletCount; i++)
 	{
 		currentScene->RemoveGameObject(playerBulletMap[i]);
-		delete playerBulletMap[i];
+		if (!playerBulletMap[i]->IsActive())
+			delete playerBulletMap[i];
+
 		playerBulletMap[i] = nullptr;
 	}
 

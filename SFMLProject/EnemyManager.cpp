@@ -1,6 +1,7 @@
 #include "stdafx.h"
 #include "EnemyManager.h"
 #include "Enemy.h"
+#include "GameObject.h"
 
 
 void EnemyManager::Init()
@@ -103,7 +104,9 @@ void EnemyManager::Release()
 	for (int i = 0; i < createEnemyCount; i++)
 	{
 		currentScene->RemoveGameObject(enemyMap[i]);
-		delete enemyMap[i];
+
+		if (!enemyMap[i]->IsActive())
+			delete enemyMap[i];
 		enemyMap[i] = nullptr;
 	}
 
