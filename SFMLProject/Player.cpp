@@ -39,7 +39,7 @@ void Player::Update(const float& deltaTime)
 		}
 	}
 	
-	if (isAttack && InputManager::GetInstance().GetKeyUp(sf::Keyboard::Z))
+	if (isAttack && InputManager::GetInstance().GetKeyDown(sf::Keyboard::Z))
 	{
 		Attack();
 	}
@@ -137,7 +137,7 @@ void Player::Attack()
 	bullet->SetOwner(this);
 	bullet->SetDamage(playerStat.damege);
 	bullet->Reset();
-	bullet->SetBulletSpeed(200.f);
+	bullet->SetBulletSpeed(400.f);
 	bullet->SetDir(sf::Vector2f::up);
 	bullet->SetActive(true);
 

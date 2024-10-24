@@ -46,7 +46,7 @@ void Enemy::CreateBullet()
 		bullet->Reset();
 		bullet->SetOwner(this);
 		bullet->SetDir(direction);
-		bullet->SetBulletSpeed(200.f);
+		bullet->SetBulletSpeed(400.f);
 		bullet->SetActive(true);
 	}
 	
