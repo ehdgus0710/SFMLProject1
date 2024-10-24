@@ -1,13 +1,14 @@
 #pragma once
 
-class Bullet;
+class PlayerBullet;
+class EnemyBullet;
 
 class BulletManager : public Singleton<BulletManager>
 {
 	friend Singleton<BulletManager>;
 private:
-	std::unordered_map<int, Bullet*> enemyBulletMap;
-	std::unordered_map<int, Bullet*> playerBulletMap;
+	std::unordered_map<int, EnemyBullet*> enemyBulletMap;
+	std::unordered_map<int, PlayerBullet*> playerBulletMap;
 
 	int				currentEnemyBulletIndex;
 	int				createEnemyBulletCount;
@@ -22,8 +23,8 @@ public:
 	void SetDisabledEnemyBullet(const std::string& name);
 	void SetDisabledPlayerBullet(const std::string& name);
 
-	Bullet* GetEnemyBulletToAEnabled();
-	Bullet* GetPlayerBulletToAEnabled();
+	EnemyBullet* GetEnemyBulletToAEnabled();
+	PlayerBullet* GetPlayerBulletToAEnabled();
 public:
 	void Release();
 

@@ -96,11 +96,22 @@ void GameObject::OnCollisionEnd(Collider* target)
 {
 }
 
+void GameObject::SetDestory(bool destory)
+{
+	isDestory = destory;
+	if (collider != nullptr)
+	{
+		collider->SetDestory(destory);
+	}
+}
+
 void GameObject::SetActive(const bool active)
 { 
 	this->active = active;
 	if (collider != nullptr)
+	{
 		collider->SetActive(active);
+	}
 }
 
 void GameObject::SetScale(const sf::Vector2f& scale)

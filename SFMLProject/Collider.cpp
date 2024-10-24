@@ -11,6 +11,8 @@ Collider::Collider(ColliderType colliderType, ColliderLayer layer, sf::Vector2f 
 	, collision(nullptr)
 	, collisionCount(0)
 	, iD(globalCount++)
+	, colliderLayer(layer)
+	, isDestory(false)
 {
 	CreateCollision(colliderType, layer, offset, size);
 }

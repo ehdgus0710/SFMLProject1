@@ -6,9 +6,6 @@ class EnemyBullet : public Bullet
 {
 public:
 	void Update(const float& deltaTime) override;
-	void FixedUpdate(const float& deltaTime) override;
-	void LateUpdate(const float& deltaTime) override;
-
 	void OnCollisionEnter(Collider* target) override;
 	void OnCollisionStay(Collider* target) override;
 	void OnCollisionEnd(Collider* target) override;

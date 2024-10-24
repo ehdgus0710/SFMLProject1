@@ -12,6 +12,7 @@ protected:
 
 	std::string name;
 	bool active = true;
+	bool isDestory;
 public:
 	void Awake() override;
 	void Start() override;
@@ -30,6 +31,8 @@ public:
 	virtual void OnCollisionEnd(Collider* target);
 
 public:
+	void SetDestory(bool destory);
+	bool GetDestory() { return isDestory; }
 	const bool IsActive() const { return active; }
 	void SetActive(const bool active);
 	const std::string& GetName() const { return name; }

@@ -1,6 +1,6 @@
 #include "stdafx.h"
 #include "Enemy.h"
-#include "Bullet.h"
+#include "EnemyBullet.h"
 #include "Player.h"
 #include "EnemyManager.h"
 #include "Collider.h"
@@ -36,13 +36,16 @@ void Enemy::CreateBullet()
 
 	for (int i = 0; i <= 10; i++)
 	{
-		Bullet* bullet = BulletManager::GetInstance().GetEnemyBulletToAEnabled();
+		EnemyBullet* bullet = BulletManager::GetInstance().GetEnemyBulletToAEnabled();
 		//sf::Vector2f direction = GetPosition() - player->GetPosition();
 		//direction.Normalized();
 
 		sf::Vector2f direction{ cosf(36.f * (float)i) , sinf(36.f * (float)i) };
 		bullet->SetPosition(position);
+
+		bullet->SetDamage(enemyStat.damege);
 		bullet->Reset();
+		bullet->SetOwner(this);
 		bullet->SetDir(direction);
 		bullet->SetBulletSpeed(200.f);
 		bullet->SetActive(true);
@@ -53,13 +56,21 @@ void Enemy::CreateBullet()
 
 void Enemy::DisableEnemy()
 {
-	SetActive(false);
+	collider->SetDestory(true);
 	SceneManager::GetInstance().GetCurrentScene()->RemoveGameObject(this);
 }
 
 void Enemy::SetPlayer(GameObject* player)
 { 
 	this->player = player;
+}
+
+void Enemy::TakeAttack(int damage)
+{
+	enemyStat.hp -= damage;
+
+	if (enemyStat.hp <= 0)
+		DisableEnemy();
 }
 
 void Enemy::Init()
@@ -87,5 +98,17 @@ void Enemy::FixedUpdate(const float& deltaTime)
 }
 
 void Enemy::LateUpdate(const float& deltaTime)
+{
+}
+
+void Enemy::OnCollisionEnter(Collider* target)
+{
+}
+
+void Enemy::OnCollisionStay(Collider* target)
+{
+}
+
+void Enemy::OnCollisionEnd(Collider* target)
 {
 }

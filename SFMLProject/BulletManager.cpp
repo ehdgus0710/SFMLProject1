@@ -1,6 +1,8 @@
 #include "stdafx.h"
 #include "BulletManager.h"
 #include "Bullet.h"
+#include "EnemyBullet.h"
+#include "PlayerBullet.h"
 
 BulletManager::BulletManager()
     : currentEnemyBulletIndex(0)
@@ -14,7 +16,7 @@ void BulletManager::CreateEnemyBullet(const std::string& name, int count)
 {
 	for (int i = 0; i < count; ++i)
 	{
-		enemyBulletMap.insert({ createEnemyBulletCount, new Bullet(sf::Vector2f::zero, 50.f, "Bullet", std::to_string(currentEnemyBulletIndex)) });
+		enemyBulletMap.insert({ createEnemyBulletCount, new EnemyBullet(sf::Vector2f::zero, 50.f, "Bullet", std::to_string(currentEnemyBulletIndex)) });
 		enemyBulletMap[createEnemyBulletCount]->CreateCollider(ColliderType::Circle, ColliderLayer::EnemyBullet, sf::Vector2f::zero);
 		enemyBulletMap[createEnemyBulletCount++]->SetActive(false);
 	}
@@ -24,7 +26,7 @@ void BulletManager::CreatePlayerBullet(const std::string& name, int count)
 {
 	for (int i = 0; i < count; ++i)
 	{
-		playerBulletMap.insert({ createPlayerBulletCount, new Bullet(sf::Vector2f::zero, 50.f, "Bullet",std::to_string(currentPlayerBulletIndex)) });
+		playerBulletMap.insert({ createPlayerBulletCount, new PlayerBullet(sf::Vector2f::zero, 50.f, "Bullet",std::to_string(currentPlayerBulletIndex)) });
 		playerBulletMap[createPlayerBulletCount]->CreateCollider(ColliderType::Circle, ColliderLayer::PlayerBullet, sf::Vector2f::zero);
 		playerBulletMap[createPlayerBulletCount++]->SetActive(false);
 	}
@@ -48,7 +50,7 @@ void BulletManager::SetDisabledPlayerBullet(const std::string& name)
 	}
 }
 
-Bullet* BulletManager::GetEnemyBulletToAEnabled()
+EnemyBullet* BulletManager::GetEnemyBulletToAEnabled()
 {
 	if (currentEnemyBulletIndex >= createEnemyBulletCount || enemyBulletMap[currentEnemyBulletIndex]->IsActive())
 	{
@@ -75,7 +77,7 @@ Bullet* BulletManager::GetEnemyBulletToAEnabled()
 	return enemyBulletMap[currentEnemyBulletIndex];
 }
 
-Bullet* BulletManager::GetPlayerBulletToAEnabled()
+PlayerBullet* BulletManager::GetPlayerBulletToAEnabled()
 {
 	if (currentPlayerBulletIndex >= createPlayerBulletCount || playerBulletMap[currentPlayerBulletIndex]->IsActive())
 	{

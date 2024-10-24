@@ -1,29 +1,20 @@
 #include "stdafx.h"
 #include "EnemyBullet.h"
+#include "Player.h"
 
 #include "Collider.h"
 
 void EnemyBullet::Update(const float& deltaTime)
 {
-	SetPosition(dir * speed + position);
-
-	if (position.x <= -10.f || position.x <= 1930.f
-		|| position.y <= -10.f || position.y <= 1100.f)
-	{
-		SetActive(false);
-	}
+	Bullet::Update(deltaTime);
 }
-
-void EnemyBullet::FixedUpdate(const float& deltaTime)
-{
-}
-
-void EnemyBullet::LateUpdate(const float& deltaTime)
-{
-}
-
 void EnemyBullet::OnCollisionEnter(Collider* target)
 {
+	if (target->GetOwner() != owner && target->GetColliderLayer() == ColliderLayer::Player)
+	{
+		((Player*)target->GetOwner())->TakeAttack(damage);
+		Disable();
+	}
 }
 
 void EnemyBullet::OnCollisionStay(Collider* target)

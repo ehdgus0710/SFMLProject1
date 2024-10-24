@@ -22,11 +22,17 @@ public:
 	void DisableEnemy();
 	void SetPlayer(GameObject* player);
 
+	void TakeAttack(int damage);
+
 public:
 	void Init() override;
 	void Update(const float& deltaTime) override;
 	void FixedUpdate(const float& deltaTime) override;
 	void LateUpdate(const float& deltaTime) override;
+
+	void OnCollisionEnter(Collider* target) override;
+	void OnCollisionStay(Collider* target) override;
+	void OnCollisionEnd(Collider* target) override;
 public:
 	Enemy(const std::string& texId, Stat stat, const std::string& name = "");
 	~Enemy();

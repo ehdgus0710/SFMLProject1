@@ -5,24 +5,29 @@
 class Collider
 {
 private:
-	static int globalCount;
-	sf::Vector2f offsetPosition;
-	sf::Vector2f colliderScale;
-	sf::Vector2f position;
-	Collision* collision;
-	GameObject* owner;
-
-	uint64_t	iD;
-	int			collisionCount;
-	bool		active;
+	static int		globalCount;
+	Collision*		collision;
+	GameObject*		owner;
+	sf::Vector2f	offsetPosition;
+	sf::Vector2f	colliderScale;
+	sf::Vector2f	position;
+	ColliderLayer	colliderLayer;
+	uint64_t		iD;
+	int				collisionCount;
+	bool			active;
+	bool			isDestory;
 
 public:
 	Collision* GetCollision() const { return collision; }
 	ColliderType GetColliderType();
 	uint64_t GetID() const { return iD; }
 
-	bool GetActive() const { return active; }
+	ColliderLayer GetColliderLayer() { return colliderLayer; }
+
 	void SetActive(bool active) { this->active = active; }
+	bool GetActive() const { return active; }
+	void SetDestory(bool destory) { isDestory = destory; }
+	bool GetDestory() { return isDestory; }
 
 	void SetOrigin(sf::Vector2f origin);
 
@@ -31,8 +36,10 @@ public:
 	sf::Vector2f GetPosition();
 	sf::Vector2f GetScale();
 
-public:
 	void SetOwner(GameObject* owner) { this->owner = owner; }
+	GameObject* GetOwner() { return owner; }
+public:
+
 	void CreateCollision(ColliderType colliderType, ColliderLayer layer, sf::Vector2f offset = sf::Vector2f::zero, sf::Vector2f size = sf::Vector2f::one);
 
 	virtual void Render(sf::RenderWindow& renderWindow);
