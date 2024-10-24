@@ -88,7 +88,7 @@ Enemy* EnemyManager::GetMonsterToAEnabled()
 	}
 
 	SceneManager::GetInstance().GetCurrentScene()->AddGameObject(enemyMap[currentCreateIndex]);
-	return enemyMap[currentCreateIndex];
+	return enemyMap[currentCreateIndex++];
 }
 
 void EnemyManager::SetPlayer(GameObject* player)

@@ -13,7 +13,6 @@ ColliderManager::ColliderManager()
 
 void ColliderManager::Init()
 {
-
     collisionCheckVector.clear();
     colliderVector.clear();
 
@@ -71,7 +70,9 @@ void ColliderManager::LayerCollision(int left, int right)
                 iter = collisionMap.find(hash);
             }
 
-            if (CheckCollision(colliderVector[left][i], colliderVector[right][j]))
+            if (!colliderVector[left][i]->GetDestory() 
+                && !colliderVector[right][j]->GetDestory() 
+                && CheckCollision(colliderVector[left][i], colliderVector[right][j]))
             {
                 // 충돌하지 않음
                 if (!iter->second)

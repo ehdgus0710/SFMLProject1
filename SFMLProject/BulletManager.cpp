@@ -74,7 +74,7 @@ EnemyBullet* BulletManager::GetEnemyBulletToAEnabled()
 	}
 
 	SceneManager::GetInstance().GetCurrentScene()->AddGameObject(enemyBulletMap[currentEnemyBulletIndex]);
-	return enemyBulletMap[currentEnemyBulletIndex];
+	return enemyBulletMap[currentEnemyBulletIndex++];
 }
 
 PlayerBullet* BulletManager::GetPlayerBulletToAEnabled()
@@ -100,7 +100,7 @@ PlayerBullet* BulletManager::GetPlayerBulletToAEnabled()
 		}
 	}
 	SceneManager::GetInstance().GetCurrentScene()->AddGameObject(playerBulletMap[currentPlayerBulletIndex]);
-	return playerBulletMap[currentPlayerBulletIndex];
+	return playerBulletMap[currentPlayerBulletIndex++];
 }
 
 void BulletManager::Release()
