@@ -22,6 +22,7 @@ void Scene::Release()
 		delete object;
 	}
 	gameObjectList.clear();
+	removeObjectVector.clear();
 }
 
 void Scene::Enter()

@@ -2,12 +2,12 @@
 
 void InputManager::UpKeyClear()
 {
-	int size = keyUpVector.size();
+	int size = (int)keyUpVector.size();
 	for (int i = 0; i < size; ++i)
 	{
 		keyboardInputMap[keyUpVector[i]] = KeyState::KeyNone;
 	}
-	size = mouseUpVector.size();
+	size = (int)mouseUpVector.size();
 	for (int i = 0; i < size; ++i)
 	{
 		mouseInputMap[mouseUpVector[i]] = KeyState::KeyNone;
