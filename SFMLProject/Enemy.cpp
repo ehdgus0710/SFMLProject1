@@ -6,6 +6,7 @@
 #include "Collider.h"
 
 #include "BulletManager.h"
+#include "GameManager.h"
 
 Enemy::Enemy(const std::string& texId, Stat stat, const std::string& name)
 	: SpriteGameObject(texId, name)
@@ -68,7 +69,10 @@ void Enemy::TakeAttack(int damage)
 	enemyStat.hp -= damage;
 
 	if (enemyStat.hp <= 0)
+	{
 		DisableEnemy();
+		GameManager::GetInstance().AddScore(10);
+	}
 }
 
 void Enemy::Init()
@@ -109,6 +113,10 @@ void Enemy::LateUpdate(const float& deltaTime)
 
 void Enemy::OnCollisionEnter(Collider* target)
 {
+	if (target->GetOwner() != this && target->GetColliderLayer() == ColliderLayer::Player)
+	{
+		((Player*)target->GetOwner())->TakeAttack(1);
+	}
 }
 
 void Enemy::OnCollisionStay(Collider* target)

@@ -1,21 +1,16 @@
 #pragma once
-#include "UIGameObject.h"
+#include "UITextGameObject.h"
 
-class Timer: public UIGameObject
+class Timer: public UITextGameObject
 {
-
 private:
-
 	sf::RectangleShape timeBar;
-	sf::Text timerText;
+	float currentTime;
 	float timer;
-	float timerSize;
 	float timeBarWidth;
 	float timeBarHeight;
 	bool isReStart;
 public:
-	Timer(float timer, const std::string& texId);
-	virtual~Timer();
 
 	void Init() override;
 	void Reset() override;
@@ -24,6 +19,9 @@ public:
 	void Update(const float& deltaTime) override;
 	void Render(sf::RenderWindow& renderWindow);
 	void TimeOver();
-
+public:
+	Timer(float timer, const std::string& textId, const std::string& name, unsigned int textSize, sf::Color textColor = sf::Color::White);
+	virtual ~Timer() = default;
+	Timer& operator= (const Timer& other) = delete;
 };
 

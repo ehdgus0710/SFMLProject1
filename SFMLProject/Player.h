@@ -1,15 +1,27 @@
 #pragma once
 #include "SpriteGameObject.h"
 #include "Stat.h"
+
+class PlayerHPBar;
+
 class Player : public SpriteGameObject
 {
 private :
+	PlayerHPBar*	playerHpbar;
 	Stat			playerStat;
 	sf::Vector2f	direction;
 	float			currentReloadTime;
+
+	float			playerInvincibilityTime;
+	float			currentInvinciblityTime;
+
+	bool			isInvincibility;
 	bool			isAttack;
 
 public:
+	void SetPlayerHPBar(PlayerHPBar* hpBar);
+	PlayerHPBar* GetPlayerHpBar();
+
 	Stat Getstat() { return playerStat; };
 	void Setstat(Stat st) { playerStat = st; };
 

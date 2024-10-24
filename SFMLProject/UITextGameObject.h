@@ -3,7 +3,7 @@
 class UITextGameObject : public UIGameObject
 {
 protected:
-	sf::Text		scoreText;
+	sf::Text		text;
 	std::string		textId;
 	std::string		textString;
 	sf::Color		textColor;

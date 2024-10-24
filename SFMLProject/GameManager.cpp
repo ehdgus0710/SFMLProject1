@@ -1,16 +1,38 @@
 #include "stdafx.h"
 #include "GameManager.h"
 
-void GameManager::SetReStart(bool reStart)
+GameManager::GameManager()
+	: score(0)
+	, player(nullptr)
+	, isGameOver(false)
+	, isClear(false)
 {
-	this->reStart = reStart;
+}
+
+void GameManager::OnGameOver()
+{
+	TimeManager::GetInstance().SetTimeScale(0.f);
+	isGameOver = true;
+}
+
+void GameManager::OnClear()
+{
+	TimeManager::GetInstance().SetTimeScale(0.f);
+	isClear = true;
+}
+
+void GameManager::Init()
+{
+	score = 0;
+	isGameOver = false;
+	isClear = false;
 }
 
 void GameManager::Release()
 {
 }
 
-GameManager::GameManager()
-	: reStart(false)
+void GameManager::SetPlayer(Player* player)
 {
+	this->player = player;
 }

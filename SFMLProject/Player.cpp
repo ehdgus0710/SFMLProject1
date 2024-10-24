@@ -2,12 +2,17 @@
 #include "Player.h"
 #include "BulletManager.h"
 #include "PlayerBullet.h"
+#include "PlayerHPBar.h"
+#include "GameManager.h"
 
 Player::Player(Stat stat, const std::string& texId, const std::string& name)
 	: playerStat(stat),SpriteGameObject(texId)
 	, currentReloadTime(0.f)
 	, isAttack(true)
-
+	, playerHpbar(nullptr)
+	, playerInvincibilityTime(0.5f)
+	, currentInvinciblityTime(0.f)
+	, isInvincibility(false)
 {
 }
 
@@ -21,6 +26,19 @@ void Player::Update(const float& deltaTime)
 		isAttack = currentReloadTime <= 0.f ? true : false;
 	}
 
+	if (isInvincibility)
+	{
+		currentInvinciblityTime -= deltaTime;
+
+		if (currentInvinciblityTime <= 0.f)
+		{
+			isInvincibility = false;
+			auto color = sprite.getColor();
+			color.a = 255;
+			sprite.setColor(color);
+		}
+	}
+	
 	if (isAttack && InputManager::GetInstance().GetKeyUp(sf::Keyboard::Z))
 	{
 		Attack();
@@ -37,6 +55,16 @@ void Player::OnCollisionStay(Collider* target)
 
 void Player::OnCollisionEnd(Collider* target)
 {
+}
+
+void Player::SetPlayerHPBar(PlayerHPBar* hpBar)
+{
+	playerHpbar = hpBar;
+}
+
+PlayerHPBar* Player::GetPlayerHpBar()
+{
+	return playerHpbar;
 }
 
 void Player::PlayerMove(float deltaTime)
@@ -80,10 +108,25 @@ void Player::PlayerMove(float deltaTime)
 
 void Player::TakeAttack(int damage)
 {
-	playerStat.hp -= damage;
+	if (isInvincibility)
+		return;
 
-	/*if (playerStat.hp <= 0)
-		DisableEnemy();*/
+	playerStat.hp -= damage;
+	isInvincibility = true;
+	currentInvinciblityTime = playerInvincibilityTime;
+
+	auto color = sprite.getColor();
+	color.a = 120;
+	sprite.setColor(color);
+
+	if (playerHpbar != nullptr)
+	{
+		playerHpbar->SetPlayerHp(playerStat.hp);
+	}
+	if (playerStat.hp <= 0)
+	{
+		GameManager::GetInstance().OnGameOver();
+	}
 }
 
 void Player::Attack()

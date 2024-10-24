@@ -10,6 +10,8 @@
 
 #include "Player.h"
 #include "Timer.h"
+#include "ScoreTextObject.h"
+#include "PlayerHPBar.h"
 
 void SceneDev2::BackgroundCreate()
 {
@@ -70,7 +72,21 @@ void SceneDev2::Enter()
 	ColliderManager::GetInstance().SetCollisionCheck(ColliderLayer::Player, ColliderLayer::Enemy);
 	ColliderManager::GetInstance().SetCollisionCheck(ColliderLayer::PlayerBullet, ColliderLayer::Enemy);
 
-	Timer* timeObj = AddGameObject(new Timer(5.f, "KOMIKAP"));
+	GameManager::GetInstance().SetPlayer((Player*)obj);
+
+	PlayerHPBar* playerHpBar = AddGameObject(new PlayerHPBar("HpBar", {80.f,20.f}));
+	playerHpBar->SetPlayer((Player*)obj);
+	playerHpBar->SetOrigin(Origins::BottomCenter);
+
+	((Player*)obj)->SetPlayerHPBar(playerHpBar);
+
+	Timer* timeObj = AddGameObject(new Timer(300.f, "KOMIKAP", "Timer", 35));
+	timeObj->SetOrigin(Origins::BottomLeft);
+	timeObj->SetPosition({ 10.f, 1020.f });
+
+	ScoreTextObject* scoreText = AddGameObject(new ScoreTextObject("KOMIKAP", "ScoreText", 35));
+	scoreText->SetOrigin(Origins::BottomLeft);
+	scoreText->SetPosition({ 10.f,980.f });
 
 	Scene::Enter();
 }
@@ -80,7 +96,6 @@ void SceneDev2::Exit()
 	TEXTURE_MANAGER.unLoad("player");
 	TEXTURE_MANAGER.unLoad("Harrier");
 	TEXTURE_MANAGER.unLoad("Bullet");
-
 
 	EnemyManager::GetInstance().Release();
 	BulletManager::GetInstance().Release();
@@ -101,11 +116,10 @@ void SceneDev2::Update(float dt)
 	 
 	EnemyManager::GetInstance().Update(dt);
 
-	if (GameManager::GetInstance().GetReStart())
+	if ((GameManager::GetInstance().IsGameOver() || GameManager::GetInstance().IsClear()) &&  InputManager::GetInstance().GetKeyDown(sf::Keyboard::Space))
 	{
 		SCENE_MANAGER.ChangeScene(SceneIds::SceneDev2);
 		TimeManager::GetInstance().SetTimeScale(1.f);
-		GameManager::GetInstance().SetReStart(false);
 	}
 
 	if (InputManager::GetInstance().GetKeyUp(sf::Keyboard::F11))

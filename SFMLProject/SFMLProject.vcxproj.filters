@@ -107,11 +107,17 @@
     <ClCompile Include="EnemyBullet.cpp">
       <Filter>Contants\Bullet</Filter>
     </ClCompile>
-    <ClCompile Include="Timer.cpp">
-      <Filter>Contants</Filter>
-    </ClCompile>
     <ClCompile Include="GameManager.cpp">
       <Filter>Contants\Manager</Filter>
+    </ClCompile>
+    <ClCompile Include="Timer.cpp">
+      <Filter>Contants\UI</Filter>
+    </ClCompile>
+    <ClCompile Include="ScoreTextObject.cpp">
+      <Filter>Contants\UI</Filter>
+    </ClCompile>
+    <ClCompile Include="PlayerHPBar.cpp">
+      <Filter>Contants\UI</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -226,14 +232,21 @@
     <ClInclude Include="EnemyBullet.h">
       <Filter>Contants\Bullet</Filter>
     </ClInclude>
-    <ClInclude Include="Timer.h">
-      <Filter>Contants</Filter>
-    </ClInclude>
     <ClInclude Include="EnemyManager.h">
       <Filter>Contants\Manager</Filter>
     </ClInclude>
     <ClInclude Include="GameManager.h">
       <Filter>Contants\Manager</Filter>
+    </ClInclude>
+    <ClInclude Include="resource.h" />
+    <ClInclude Include="Timer.h">
+      <Filter>Contants\UI</Filter>
+    </ClInclude>
+    <ClInclude Include="ScoreTextObject.h">
+      <Filter>Contants\UI</Filter>
+    </ClInclude>
+    <ClInclude Include="PlayerHPBar.h">
+      <Filter>Contants\UI</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -300,5 +313,11 @@
     <Filter Include="Contants\Bullet">
       <UniqueIdentifier>{716e0225-56bb-43f3-be71-50d9afc68dc5}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Contants\UI">
+      <UniqueIdentifier>{a89c67c2-1bb9-426a-b4fc-4ae5810d17c0}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="SFMLProject.rc" />
   </ItemGroup>
 </Project>

@@ -172,11 +172,13 @@
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Player.cpp" />
     <ClCompile Include="PlayerBullet.cpp" />
+    <ClCompile Include="PlayerHPBar.cpp" />
     <ClCompile Include="Resources.cpp" />
     <ClCompile Include="Scene.cpp" />
     <ClCompile Include="SceneDev1.cpp" />
     <ClCompile Include="SceneDev2.cpp" />
     <ClCompile Include="SceneManager.cpp" />
+    <ClCompile Include="ScoreTextObject.cpp" />
     <ClCompile Include="Singleton.cpp" />
     <ClCompile Include="SpriteGameObject.cpp" />
     <ClCompile Include="Stat.cpp" />
@@ -217,12 +219,15 @@
     <ClInclude Include="Object.h" />
     <ClInclude Include="Player.h" />
     <ClInclude Include="PlayerBullet.h" />
+    <ClInclude Include="PlayerHPBar.h" />
+    <ClInclude Include="resource.h" />
     <ClInclude Include="Resources.h" />
     <ClInclude Include="ResourcesManager.h" />
     <ClInclude Include="Scene.h" />
     <ClInclude Include="SceneDev1.h" />
     <ClInclude Include="SceneDev2.h" />
     <ClInclude Include="SceneManager.h" />
+    <ClInclude Include="ScoreTextObject.h" />
     <ClInclude Include="Singleton.h" />
     <ClInclude Include="SpriteGameObject.h" />
     <ClInclude Include="Stat.h" />
@@ -234,6 +239,9 @@
     <ClInclude Include="UITextGameObject.h" />
     <ClInclude Include="Utils.h" />
     <ClInclude Include="WindowManager.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="SFMLProject.rc" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
