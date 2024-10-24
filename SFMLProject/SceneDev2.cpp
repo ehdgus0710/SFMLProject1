@@ -8,7 +8,7 @@
 #include "Background.h"
 
 #include "Player.h"
-
+#include "Timer.h"
 void SceneDev2::BackgroundCreate()
 {
 	auto size = TEXTURE_MANAGER.Get("Map").getSize();
@@ -60,6 +60,8 @@ void SceneDev2::Enter()
 	obj->SetPosition({ });
 	((UITextGameObject*)obj)->SetString("SceneDev2");
 
+	GameObject* timeObj = AddGameObject(new Timer(60.f, 60.f, "KOMIKAP"));
+	timeObj->Init();
 
 	EnemyManager::GetInstance().Init();
 	EnemyManager::GetInstance().SetPlayer(obj);
