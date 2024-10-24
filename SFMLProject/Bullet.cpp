@@ -26,5 +26,6 @@ void Bullet::Update(const float& deltaTime)
 		|| position.y <= -10.f || position.y >= 1100.f)
 	{
 		SetActive(false);
+		SceneManager::GetInstance().GetCurrentScene()->RemoveGameObject(this);
 	}
 }

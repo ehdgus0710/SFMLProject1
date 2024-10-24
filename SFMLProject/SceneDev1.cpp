@@ -20,18 +20,18 @@ void SceneDev1::Init()
 
 void SceneDev1::Enter()
 {
-	GameObject* obj = AddGameObecjt(new SpriteGameObject("player"));
+	GameObject* obj = AddGameObject(new SpriteGameObject("player"));
 
 	obj->SetOrigin(Origins::MiddleCenter);
 	obj->SetPosition({ 1920.f * 0.5f, 1080 * 0.5f });
 	obj->CreateCollider(ColliderType::Rectangle, ColliderLayer::Player);
 
-	obj = AddGameObecjt(new UITextGameObject("fonts/KOMIKAP_.ttf", "", 100));
+	obj = AddGameObject(new UITextGameObject("fonts/KOMIKAP_.ttf", "", 100));
 	obj->SetOrigin(Origins::TopLeft);
 	obj->SetPosition({ });
 	((UITextGameObject*)obj)->SetString("SceneDev1");
 
-	Test* test = AddGameObecjt(new Test("player"));
+	Test* test = AddGameObject(new Test("player"));
 	test->CreateCollider(ColliderType::Rectangle, ColliderLayer::Player);
 
 	Scene::Enter();

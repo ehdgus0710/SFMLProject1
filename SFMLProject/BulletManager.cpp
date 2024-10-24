@@ -3,43 +3,62 @@
 #include "Bullet.h"
 
 BulletManager::BulletManager()
-    : currentCreateIndex(0)
-    , createBulletCount(0)
+    : currentEnemyBulletIndex(0)
+    , createEnemyBulletCount(0)
+	, createPlayerBulletCount(0)
+	, currentPlayerBulletIndex(0)
 {
 }
 
-void BulletManager::CreateBullet(Scene* createScene, const std::string& name, int count)
+void BulletManager::CreateEnemyBullet(const std::string& name, int count)
 {
 	for (int i = 0; i < count; ++i)
 	{
-		bulletMap.insert({ createBulletCount, new Bullet(sf::Vector2f::zero, 50.f, "Bullet",std::to_string(currentCreateIndex)) });
-		createScene->AddGameObject(bulletMap[createBulletCount]);
-
-		bulletMap[createBulletCount]->CreateCollider(ColliderType::Circle, ColliderLayer::EnemyBullet, sf::Vector2f::zero);
-		bulletMap[createBulletCount++]->SetActive(false);
+		enemyBulletMap.insert({ createEnemyBulletCount, new Bullet(sf::Vector2f::zero, 50.f, "Bullet", std::to_string(currentEnemyBulletIndex)) });
+		enemyBulletMap[createEnemyBulletCount]->CreateCollider(ColliderType::Circle, ColliderLayer::EnemyBullet, sf::Vector2f::zero);
+		enemyBulletMap[createEnemyBulletCount++]->SetActive(false);
 	}
 }
 
-void BulletManager::SetDisabledBullet(const std::string& name)
+void BulletManager::CreatePlayerBullet(const std::string& name, int count)
 {
-	auto iter = bulletMap.find(std::stoi(name));
-	if (iter != bulletMap.end())
+	for (int i = 0; i < count; ++i)
+	{
+		playerBulletMap.insert({ createPlayerBulletCount, new Bullet(sf::Vector2f::zero, 50.f, "Bullet",std::to_string(currentPlayerBulletIndex)) });
+		playerBulletMap[createPlayerBulletCount]->CreateCollider(ColliderType::Circle, ColliderLayer::PlayerBullet, sf::Vector2f::zero);
+		playerBulletMap[createPlayerBulletCount++]->SetActive(false);
+	}
+}
+
+void BulletManager::SetDisabledEnemyBullet(const std::string& name)
+{
+	auto iter = enemyBulletMap.find(std::stoi(name));
+	if (iter != enemyBulletMap.end())
 	{
 		//iter->second->Reset();
 	}
 }
 
-Bullet* BulletManager::GetBulletToAEnabled()
+void BulletManager::SetDisabledPlayerBullet(const std::string& name)
 {
-	if (currentCreateIndex >= createBulletCount || bulletMap[currentCreateIndex]->IsActive())
+	auto iter = playerBulletMap.find(std::stoi(name));
+	if (iter != playerBulletMap.end())
 	{
-		currentCreateIndex = 0;
+		//iter->second->Reset();
+	}
+}
+
+Bullet* BulletManager::GetEnemyBulletToAEnabled()
+{
+	if (currentEnemyBulletIndex >= createEnemyBulletCount || enemyBulletMap[currentEnemyBulletIndex]->IsActive())
+	{
+		currentEnemyBulletIndex = 0;
 		bool isFindNonActiveEnemy = false;
 
-		for (int i = 0; i < createBulletCount; ++i)
+		for (int i = 0; i < createEnemyBulletCount; ++i)
 		{
-			currentCreateIndex = i;
-			if (!bulletMap[i]->IsActive())
+			currentEnemyBulletIndex = i;
+			if (!enemyBulletMap[i]->IsActive())
 			{
 				isFindNonActiveEnemy = true;
 				break;
@@ -48,23 +67,63 @@ Bullet* BulletManager::GetBulletToAEnabled()
 
 		if (!isFindNonActiveEnemy)
 		{
-			CreateBullet(SceneManager::GetInstance().GetCurrentScene(), bulletMap[0]->GetName(), createBulletCount);
+			CreateEnemyBullet(enemyBulletMap[0]->GetName(), createEnemyBulletCount);
 		}
 	}
 
-	return bulletMap[currentCreateIndex];
+	SceneManager::GetInstance().GetCurrentScene()->AddGameObject(enemyBulletMap[currentEnemyBulletIndex]);
+	return enemyBulletMap[currentEnemyBulletIndex];
+}
+
+Bullet* BulletManager::GetPlayerBulletToAEnabled()
+{
+	if (currentPlayerBulletIndex >= createPlayerBulletCount || playerBulletMap[currentPlayerBulletIndex]->IsActive())
+	{
+		currentPlayerBulletIndex = 0;
+		bool isFindNonActivePlayerBullet = false;
+
+		for (int i = 0; i < createPlayerBulletCount; ++i)
+		{
+			currentPlayerBulletIndex = i;
+			if (!playerBulletMap[i]->IsActive())
+			{
+				isFindNonActivePlayerBullet = true;
+				break;
+			}
+		}
+
+		if (!isFindNonActivePlayerBullet)
+		{
+			CreatePlayerBullet(playerBulletMap[0]->GetName(), createPlayerBulletCount);
+		}
+	}
+	SceneManager::GetInstance().GetCurrentScene()->AddGameObject(playerBulletMap[currentPlayerBulletIndex]);
+	return playerBulletMap[currentPlayerBulletIndex];
 }
 
 void BulletManager::Release()
 {
 	auto currentScene = SceneManager::GetInstance().GetCurrentScene();
-	for (int i = 0; i < createBulletCount; i++)
+	for (int i = 0; i < createEnemyBulletCount; i++)
 	{
-		currentScene->RemoveGameObject(bulletMap[i]);
-		delete bulletMap[i];
-		bulletMap[i] = nullptr;
+		currentScene->RemoveGameObject(enemyBulletMap[i]);
+		delete enemyBulletMap[i];
+		enemyBulletMap[i] = nullptr;
 	}
-	currentCreateIndex = 0;
-	createBulletCount = 0;
-	bulletMap.clear();
+
+	for (int i = 0; i < createEnemyBulletCount; i++)
+	{
+		currentScene->RemoveGameObject(playerBulletMap[i]);
+		delete playerBulletMap[i];
+		playerBulletMap[i] = nullptr;
+	}
+
+	currentEnemyBulletIndex = 0;
+	createEnemyBulletCount = 0;
+
+	currentPlayerBulletIndex = 0;
+	createPlayerBulletCount = 0;
+
+	playerBulletMap.clear();
+	enemyBulletMap.clear();
 }

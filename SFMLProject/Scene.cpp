@@ -39,6 +39,12 @@ void Scene::Exit()
 
 void Scene::Update(float deltaTime)
 {
+	for (auto object : removeObjectVector)
+	{
+		gameObjectList.remove(object);
+	}
+	removeObjectVector.clear();
+
 	for (auto object : gameObjectList)
 	{
 		if (!object->IsActive())
@@ -70,7 +76,7 @@ GameObject* Scene::AddGameObject(GameObject* obj)
 
 void Scene::RemoveGameObject(GameObject* obj)
 {
-	gameObjectList.remove(obj);
+	removeObjectVector.push_back(obj);
 }
 
 GameObject* Scene::FindGameObject(const std::string& name)

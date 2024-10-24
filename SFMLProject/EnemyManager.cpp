@@ -34,6 +34,7 @@ void EnemyManager::RespwanEnemy()
 	for (int i = 0; i < respawnCount; ++i)
 	{
 		enemy = GetMonsterToAEnabled();
+		enemy->Reset();
 		enemy->SetPlayer(player);
 		enemy->SetActive(true);
 		int createWidth = (rand() % createWidthRange) - createWidthRange / 2;
@@ -43,12 +44,11 @@ void EnemyManager::RespwanEnemy()
 	currentCreateTime = respawnTime;
 }
 
-void EnemyManager::CreateEnemy(Scene* createScene, const std::string& name, int count)
+void EnemyManager::CreateEnemy(const std::string& name, int count)
 {
 	for (int i = 0; i < count; ++i)
 	{
 		enemyMap.insert({ i, new Enemy(name, Stat( 3, 100.f, 3.f, 1 ) , std::to_string(createEnemyCount)) });
-		createScene->AddGameObject(enemyMap[createEnemyCount]);
 		enemyMap[createEnemyCount]->SetOrigin(Origins::MiddleCenter);
 		enemyMap[createEnemyCount]->CreateCollider(ColliderType::Circle, ColliderLayer::Enemy, sf::Vector2f::zero,sf::Vector2f::one * 0.5f);
 		enemyMap[createEnemyCount++]->SetActive(false);
@@ -83,10 +83,11 @@ Enemy* EnemyManager::GetMonsterToAEnabled()
 
 		if (!isFindNonActiveEnemy)
 		{
-			CreateEnemy(SceneManager::GetInstance().GetCurrentScene(), enemyMap[0]->GetName(), createEnemyCount);
+			CreateEnemy(enemyMap[0]->GetName(), createEnemyCount);
 		}
 	}
 
+	SceneManager::GetInstance().GetCurrentScene()->AddGameObject(enemyMap[currentCreateIndex]);
 	return enemyMap[currentCreateIndex];
 }
 

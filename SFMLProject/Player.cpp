@@ -60,11 +60,11 @@ void Player::PlayerMove(float deltaTime)
 
 void Player::Attack()
 {
-	Bullet* bullet = BulletManager::GetInstance().GetBulletToAEnabled();
+	Bullet* bullet = BulletManager::GetInstance().GetPlayerBulletToAEnabled();
 
 	bullet->SetPosition(position);
 	bullet->Reset();
-	bullet->SetBulletSpeed(100.f);
+	bullet->SetBulletSpeed(200.f);
 	bullet->SetDir(sf::Vector2f::up);
 	bullet->SetActive(true);
 

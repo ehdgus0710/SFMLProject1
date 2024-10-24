@@ -24,7 +24,7 @@ public:
 	void SetRespawnTime(float time);
 
 	void RespwanEnemy();
-	void CreateEnemy(Scene* createScene , const std::string& name, int count);
+	void CreateEnemy(const std::string& name, int count);
 	void SetDisabledEnemy(const std::string& name);
 	Enemy* GetMonsterToAEnabled();
 

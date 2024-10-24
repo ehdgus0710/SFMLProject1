@@ -36,25 +36,25 @@ void Enemy::CreateBullet()
 
 	for (int i = 0; i <= 10; i++)
 	{
-		Bullet* bullet = BulletManager::GetInstance().GetBulletToAEnabled();
+		Bullet* bullet = BulletManager::GetInstance().GetEnemyBulletToAEnabled();
 		//sf::Vector2f direction = GetPosition() - player->GetPosition();
 		//direction.Normalized();
 
 		sf::Vector2f direction{ cosf(36.f * (float)i) , sinf(36.f * (float)i) };
 		bullet->SetPosition(position);
+		bullet->Reset();
 		bullet->SetDir(direction);
+		bullet->SetBulletSpeed(200.f);
 		bullet->SetActive(true);
-		bullet->GetCollider()->SetActive(true);
 	}
-
 	
-
 	currentReloadTime = enemyStat.GetAttakSpeed();
 }
 
 void Enemy::DisableEnemy()
 {
 	SetActive(false);
+	SceneManager::GetInstance().GetCurrentScene()->RemoveGameObject(this);
 }
 
 void Enemy::SetPlayer(GameObject* player)

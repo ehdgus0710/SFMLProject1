@@ -15,14 +15,14 @@ void SceneDev2::BackgroundCreate()
 
 	ResourcesManager<sf::Font>::GetInstance().Load("KOMIKAP", "fonts/KOMIKAP_.ttf");
 
-	GameObject* backGround = AddGameObecjt(new Background("Map", "Map1"));
+	GameObject* backGround = AddGameObject(new Background("Map", "Map1"));
 	backGround->SetOrigin(Origins::MiddleCenter);
 
 
 	backGround->SetPosition({ 1920.f * 0.5f, size.y * -0.5f });
 	backGround->SetScale({ 10.0f, 1.f });
 
-	backGround = AddGameObecjt(new Background("Map", "Map2"));
+	backGround = AddGameObject(new Background("Map", "Map2"));
 	backGround->SetOrigin(Origins::MiddleCenter);
 	backGround->SetPosition({ 1920.f * 0.5f, size.y * 0.5f });
 	backGround->SetScale({ 10.0f, 1.f });
@@ -49,14 +49,14 @@ void SceneDev2::Enter()
 {
 	ResourcesLoad();
 
-	GameObject* obj = AddGameObecjt(new Player(Stat(5, 500.f, 5, 1), "Harrier"));
+	GameObject* obj = AddGameObject(new Player(Stat(5, 500.f, 5, 1), "Harrier"));
 
 	obj->SetOrigin(Origins::MiddleCenter);
 	obj->SetPosition({ 1920.f * 0.5f, 1080 * 0.5f });
 	obj->CreateCollider(ColliderType::Circle, ColliderLayer::Player);
 	obj->SetActive(true);
 
-	obj = AddGameObecjt(new UITextGameObject("KOMIKAP", "", 100));
+	obj = AddGameObject(new UITextGameObject("KOMIKAP", "", 100));
 	obj->SetOrigin(Origins::TopLeft);
 	obj->SetPosition({ });
 	((UITextGameObject*)obj)->SetString("SceneDev2");
@@ -65,10 +65,11 @@ void SceneDev2::Enter()
 
 	EnemyManager::GetInstance().Init();
 	EnemyManager::GetInstance().SetPlayer(obj);
-	EnemyManager::GetInstance().CreateEnemy(this, "Harrier", 50);
+	EnemyManager::GetInstance().CreateEnemy("Harrier", 50);
 	EnemyManager::GetInstance().SetCreateInfo({ 1920.f * 0.5f , -25.f }, 300, 3.f, 1);
 
-	BulletManager::GetInstance().CreateBullet(this, "Bullet", 300);
+	BulletManager::GetInstance().CreatePlayerBullet("Bullet", 100);
+	BulletManager::GetInstance().CreateEnemyBullet("Bullet", 300);
 
 	ColliderManager::GetInstance().SetCollisionCheck(ColliderLayer::Player, ColliderLayer::EnemyBullet);
 	ColliderManager::GetInstance().SetCollisionCheck(ColliderLayer::Player, ColliderLayer::Enemy);

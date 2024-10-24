@@ -6,15 +6,24 @@ class BulletManager : public Singleton<BulletManager>
 {
 	friend Singleton<BulletManager>;
 private:
-	std::unordered_map<int, Bullet*> bulletMap;
+	std::unordered_map<int, Bullet*> enemyBulletMap;
+	std::unordered_map<int, Bullet*> playerBulletMap;
 
-	int				currentCreateIndex;
-	int				createBulletCount;
+	int				currentEnemyBulletIndex;
+	int				createEnemyBulletCount;
+
+	int				currentPlayerBulletIndex;
+	int				createPlayerBulletCount;
 
 public:
-	void CreateBullet(Scene* createScene, const std::string& name, int count);
-	void SetDisabledBullet(const std::string& name);
-	Bullet* GetBulletToAEnabled();
+	void CreateEnemyBullet(const std::string& name, int count);
+	void CreatePlayerBullet(const std::string& name, int count);
+
+	void SetDisabledEnemyBullet(const std::string& name);
+	void SetDisabledPlayerBullet(const std::string& name);
+
+	Bullet* GetEnemyBulletToAEnabled();
+	Bullet* GetPlayerBulletToAEnabled();
 public:
 	void Release();
 
