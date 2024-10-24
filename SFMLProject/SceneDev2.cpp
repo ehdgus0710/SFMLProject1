@@ -60,11 +60,14 @@ void SceneDev2::Enter()
 	obj->CreateCollider(ColliderType::Circle, ColliderLayer::Player, sf::Vector2f::zero, { 0.5f,0.5f });
 	obj->SetActive(true);
 
+	sf::Vector2f resolutionSize = sf::Vector2f(WindowManager::GetInstance().GetResolutionSize());
+
 	EnemyManager::GetInstance().Init();
 	EnemyManager::GetInstance().SetPlayer(obj);
-	EnemyManager::GetInstance().SetEnemyStat(Stat(3, 100.f, 3.f, 1));
+	EnemyManager::GetInstance().SetEnemyStat(Stat(3, 100.f, 2.5f, 1));
 	EnemyManager::GetInstance().CreateEnemy("Enemy", 50);
-	EnemyManager::GetInstance().SetCreateInfo({ 1920.f * 0.5f , -25.f }, 300, 3.f, 1);
+	EnemyManager::GetInstance().SetCreateInfo({ resolutionSize.x * 0.5f , -25.f }, (int)(resolutionSize.x), 3.f, 1);
+
 	
 	BulletManager::GetInstance().CreatePlayerBullet("Bullet", 100);
 	BulletManager::GetInstance().CreateEnemyBullet("Bullet", 300);
@@ -87,7 +90,7 @@ void SceneDev2::Enter()
 
 	ScoreTextObject* scoreText = AddGameObject(new ScoreTextObject("KOMIKAP", "ScoreText", 35));
 	scoreText->SetOrigin(Origins::BottomLeft);
-	scoreText->SetPosition({ 10.f,980.f });
+	scoreText->SetPosition({ 10.f, 980.f });
 
 	Scene::Enter();
 }

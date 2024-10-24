@@ -5,10 +5,15 @@ class Timer: public UITextGameObject
 {
 private:
 	sf::RectangleShape timeBar;
+
 	float currentTime;
 	float timer;
 	float timeBarWidth;
 	float timeBarHeight;
+
+	float levelPercent;
+
+	bool isMaxLevel;
 	bool isReStart;
 public:
 

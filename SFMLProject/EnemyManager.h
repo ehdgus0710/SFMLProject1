@@ -15,8 +15,9 @@ private:
 	Stat			enemyStat;
 	float			respawnTime;
 	float			currentCreateTime;
-	int				respawnCount;
+
 	int				createWidthRange;
+	int				respawnCount;
 	int				currentCreateIndex;
 	int				createEnemyCount;
 
@@ -28,6 +29,7 @@ public:
 	void SetCreateInfo(const sf::Vector2f& createPos, int createWidthRange, float respawnTime, int createCount);
 	void SetRespawnCount(int count);
 	void SetRespawnTime(float time);
+	void SetSubRespawnTime(float time) { respawnTime -= time; }
 
 	void RespwanEnemy();
 	void CreateEnemy(const std::string& name, int count);

@@ -13,6 +13,8 @@ public:
 
 
 	void SetResolutionSize(const sf::Vector2u resolutionSize) { this->resolutionSize = resolutionSize; }
+	sf::Vector2u GetResolutionSize() { return resolutionSize; }
+
 	void SetTitleName(const std::string titleName) { this->titleName = titleName; }
 
 	sf::RenderWindow* GetRenderWindow() { return renderWindow; }

@@ -9,12 +9,23 @@ class Player;
 class Enemy : public SpriteGameObject
 {
 private:
-	GameObject* player;
-	Stat enemyStat;
-	sf::Vector2f moveDirection;
-	float currentReloadTime;
+	GameObject*		player;
+	Stat			enemyStat;
+	sf::Vector2f	moveDirection;
+	float			currentReloadTime;
 
-	bool isAttack;
+	float			attackOneReloadTime;
+	float			attackThreeReloadTime;
+	float			attackThreeAngle;
+	float			attackFourReloadTime;
+
+	float			currentHitEffectTime;
+	float			HitEffectTime;
+	bool			isHit;
+	bool			isAttack;
+
+	uint64_t		attackPattern;
+	uint64_t		maxAttackPattern;
 
 public:
 	void Attack();
@@ -24,6 +35,14 @@ public:
 
 	void TakeAttack(int damage);
 
+	void AttackPattern(uint64_t pos);
+
+	void Attack1();
+	void Attack2();
+	void Attack3();
+	void Attack4();
+
+	void SetAttackPattern(uint64_t attackNumber);
 public:
 	void Init() override;
 	void Reset() override;

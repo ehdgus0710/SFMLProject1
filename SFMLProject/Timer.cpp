@@ -1,14 +1,17 @@
 #include "stdafx.h"
 #include "Timer.h"
 #include "GameManager.h"
+#include "EnemyManager.h"
 
 Timer::Timer(float timer, const std::string& textId, const std::string& name, unsigned int textSize, sf::Color textColor)
 	: UITextGameObject(textId, name, textSize, textColor)
 	, currentTime(timer)
-	, timeBarWidth(600)
+	, timeBarWidth(1920)
 	, timeBarHeight(20)
 	, timer(timer)
-	,isReStart(false)
+	, isReStart(false)
+	, levelPercent(0.8f)
+	, isMaxLevel(false)
 {
 
 }
@@ -24,7 +27,20 @@ void Timer::Update(const float& deltaTime)
 {
 	currentTime -= deltaTime;
 	text.setString(textString + std::to_string((int)currentTime));
+
 	TimeBar(deltaTime);
+
+
+	if (!isMaxLevel && levelPercent >= currentTime / timer)
+	{
+		levelPercent -= 0.1f;
+		EnemyManager::GetInstance().SetSubRespawnTime(0.5f);
+
+		if (levelPercent >= 0.5f)
+
+			isMaxLevel = true;
+	}
+
 	if (currentTime < 0)
 		TimeOver();
 }

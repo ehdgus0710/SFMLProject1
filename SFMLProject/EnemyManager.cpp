@@ -38,6 +38,7 @@ void EnemyManager::RespwanEnemy()
 		enemy->Reset();
 		enemy->SetPlayer(player);
 		enemy->SetActive(true);
+		enemy->SetAttackPattern(rand() % 100);
 		int createWidth = (rand() % createWidthRange) - createWidthRange / 2;
 		enemy->SetPosition({ createPosition.x + (float)createWidth, createPosition.y });
 	}

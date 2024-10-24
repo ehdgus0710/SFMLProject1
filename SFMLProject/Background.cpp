@@ -26,7 +26,7 @@ void Background::Reset()
 
 Background::Background(const std::string& texId, const std::string& name)
 	: SpriteGameObject(texId, name)
-	, moveSpeed(300.f)
+	, moveSpeed(100.f)
 	, moveMax(0)
 {
 }
