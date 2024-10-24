@@ -1,7 +1,7 @@
 #include "stdafx.h"
 #include "Player.h"
-#include "Bullet.h"
 #include "BulletManager.h"
+#include "PlayerBullet.h"
 
 Player::Player(Stat stat, const std::string& texId, const std::string& name)
 	: playerStat(stat),SpriteGameObject(texId)
@@ -25,6 +25,18 @@ void Player::Update(const float& deltaTime)
 	{
 		Attack();
 	}
+}
+
+void Player::OnCollisionEnter(Collider* target)
+{
+}
+
+void Player::OnCollisionStay(Collider* target)
+{
+}
+
+void Player::OnCollisionEnd(Collider* target)
+{
 }
 
 void Player::PlayerMove(float deltaTime)
@@ -53,16 +65,34 @@ void Player::PlayerMove(float deltaTime)
 	position.x += direction.x * playerStat.GetSpeed() * deltaTime;
 	position.y += direction.y * playerStat.GetSpeed() * deltaTime;
 
+	if (position.x > 1920.f)
+		position.x = 1920.f;
+	else if (position.x < 0.f)
+		position.x = 0.f;
+	else if (position.y > 1080.f)
+		position.y = 1080.f;
+	else if (position.y < 0.f)
+		position.y = 0.f;
 	SetPosition(position);
 	direction = sf::Vector2f::zero;
 
 }
 
+void Player::TakeAttack(int damage)
+{
+	playerStat.hp -= damage;
+
+	/*if (playerStat.hp <= 0)
+		DisableEnemy();*/
+}
+
 void Player::Attack()
 {
-	Bullet* bullet = BulletManager::GetInstance().GetPlayerBulletToAEnabled();
+	PlayerBullet* bullet = BulletManager::GetInstance().GetPlayerBulletToAEnabled();
 
 	bullet->SetPosition(position);
+	bullet->SetOwner(this);
+	bullet->SetDamage(playerStat.damege);
 	bullet->Reset();
 	bullet->SetBulletSpeed(200.f);
 	bullet->SetDir(sf::Vector2f::up);

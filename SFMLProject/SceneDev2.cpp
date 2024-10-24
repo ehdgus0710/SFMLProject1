@@ -49,7 +49,7 @@ void SceneDev2::Enter()
 {
 	ResourcesLoad();
 
-	GameObject* obj = AddGameObject(new Player(Stat(5, 500.f, 5, 1), "Harrier"));
+	GameObject* obj = AddGameObject(new Player(Stat(5, 500.f, 0.5f, 1), "Harrier"));
 
 	obj->SetOrigin(Origins::MiddleCenter);
 	obj->SetPosition({ 1920.f * 0.5f, 1080 * 0.5f });
