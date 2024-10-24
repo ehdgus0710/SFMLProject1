@@ -9,6 +9,7 @@ protected:
 
 public:
 	void SetPosition(const sf::Vector2f& pos) override;
+	void SetRotation(const sf::Vector2f& rotation) override;
 	void Render(sf::RenderWindow& renderWindow) override;
 	void Reset() override;
 

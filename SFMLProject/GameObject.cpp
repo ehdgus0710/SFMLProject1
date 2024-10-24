@@ -35,6 +35,11 @@ void GameObject::SetPosition(const sf::Vector2f& pos)
 		collider->SetPosition(position);
 }
 
+void GameObject::SetRotation(const sf::Vector2f& rotation)
+{ 
+	this->rotation = rotation;
+}
+
 void GameObject::SetOrigin(Origins preset)
 {
 	originPreset = preset;

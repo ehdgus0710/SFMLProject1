@@ -12,10 +12,15 @@ SpriteGameObject::SpriteGameObject(const std::string& texId, const std::string& 
 
 
 void SpriteGameObject::SetPosition(const sf::Vector2f& pos)
-
 {
 	GameObject::SetPosition(pos);
 	sprite.setPosition(pos);
+}
+
+void SpriteGameObject::SetRotation(const sf::Vector2f& rotation)
+{
+	GameObject::SetRotation(rotation);
+	sprite.setRotation(rotation.y * 180.f);
 }
 
 void SpriteGameObject::Render(sf::RenderWindow& renderWindow)

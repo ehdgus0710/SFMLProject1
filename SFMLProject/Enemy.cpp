@@ -80,6 +80,8 @@ void Enemy::Init()
 void Enemy::Reset()
 {
 	SpriteGameObject::Reset();
+	
+	SetRotation(moveDirection);
 	enemyStat = EnemyManager::GetInstance().GetEnemyStat();
 }
 

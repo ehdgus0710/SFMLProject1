@@ -38,8 +38,11 @@ public:
 	const std::string& GetName() const { return name; }
 	void SetName(const std::string& name) { this->name = name; }
 
-	sf::Vector2f GetPosition() const { return position; }
 	virtual void SetPosition(const sf::Vector2f& pos);
+	sf::Vector2f GetPosition() const { return position; }
+
+	virtual void SetRotation(const sf::Vector2f& rotation);
+	sf::Vector2f GetRotation() const { return rotation; }
 
 	sf::Vector2f GetOrigin() const { return origin; }
 	virtual void SetOrigin(Origins preset);
