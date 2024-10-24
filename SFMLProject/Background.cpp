@@ -16,8 +16,9 @@ void Background::Update(const float& deltaTime)
 	}
 }
 
-void Background::Init()
+void Background::Reset()
 {
+	SpriteGameObject::Reset();
 	auto size = TEXTURE_MANAGER.Get("Map").getSize();
 	spriteSize = size;
 	moveMax = spriteSize.y / 2;

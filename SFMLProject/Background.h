@@ -10,7 +10,7 @@ private:
 
 public:
 	void Update(const float& deltaTime) override;
-	void Init() override;
+	void Reset() override;
 
 public:
 	Background(const std::string& texId, const std::string& name = "");

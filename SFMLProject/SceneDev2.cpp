@@ -12,21 +12,19 @@
 void SceneDev2::BackgroundCreate()
 {
 	auto size = TEXTURE_MANAGER.Get("Map").getSize();
-
-	ResourcesManager<sf::Font>::GetInstance().Load("KOMIKAP", "fonts/KOMIKAP_.ttf");
-
 	GameObject* backGround = AddGameObject(new Background("Map", "Map1"));
 	backGround->SetOrigin(Origins::MiddleCenter);
 
 
 	backGround->SetPosition({ 1920.f * 0.5f, size.y * -0.5f });
 	backGround->SetScale({ 10.0f, 1.f });
+	backGround->SetActive(true);
 
 	backGround = AddGameObject(new Background("Map", "Map2"));
 	backGround->SetOrigin(Origins::MiddleCenter);
 	backGround->SetPosition({ 1920.f * 0.5f, size.y * 0.5f });
 	backGround->SetScale({ 10.0f, 1.f });
-
+	backGround->SetActive(true);
 }
 
 void SceneDev2::ResourcesLoad()
@@ -49,6 +47,7 @@ void SceneDev2::Enter()
 {
 	ResourcesLoad();
 
+	BackgroundCreate();
 	GameObject* obj = AddGameObject(new Player(Stat(5, 500.f, 0.5f, 1), "Harrier"));
 
 	obj->SetOrigin(Origins::MiddleCenter);
@@ -61,7 +60,6 @@ void SceneDev2::Enter()
 	obj->SetPosition({ });
 	((UITextGameObject*)obj)->SetString("SceneDev2");
 
-	//BackgroundCreate();
 
 	EnemyManager::GetInstance().Init();
 	EnemyManager::GetInstance().SetPlayer(obj);
