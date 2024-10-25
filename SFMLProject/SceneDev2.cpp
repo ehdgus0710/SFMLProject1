@@ -36,7 +36,8 @@ void SceneDev2::ResourcesLoad()
 	ResourcesManager<sf::Font>::GetInstance().Load("KOMIKAP", "fonts/KOMIKAP_.ttf");
 	TEXTURE_MANAGER.Load("Map", "graphics/MapTile.png");
 	TEXTURE_MANAGER.Load("player", "graphics/player.png");
-	TEXTURE_MANAGER.Load("Enemy", "graphics/Harrier.png");
+	TEXTURE_MANAGER.Load("PlayerBullet", "graphics/PlayerBullet.png");
+	TEXTURE_MANAGER.Load("Enemy", "graphics/Enemy.png");
 	TEXTURE_MANAGER.Load("Bullet", "graphics/Bullet.png");
 }
 
@@ -69,7 +70,7 @@ void SceneDev2::Enter()
 	EnemyManager::GetInstance().SetCreateInfo({ resolutionSize.x * 0.5f , -25.f }, (int)(resolutionSize.x), 3.f, 1);
 
 	
-	BulletManager::GetInstance().CreatePlayerBullet("Bullet", 100);
+	BulletManager::GetInstance().CreatePlayerBullet("PlayerBullet", 100);
 	BulletManager::GetInstance().CreateEnemyBullet("Bullet", 300);
 	
 	ColliderManager::GetInstance().SetCollisionCheck(ColliderLayer::Player, ColliderLayer::EnemyBullet);
@@ -98,6 +99,7 @@ void SceneDev2::Enter()
 void SceneDev2::Exit()
 {
 	TEXTURE_MANAGER.unLoad("player");
+	TEXTURE_MANAGER.unLoad("PlayerBullet");
 	TEXTURE_MANAGER.unLoad("Enemy");
 	TEXTURE_MANAGER.unLoad("Bullet");
 

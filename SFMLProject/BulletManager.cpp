@@ -26,7 +26,7 @@ void BulletManager::CreatePlayerBullet(const std::string& name, int count)
 {
 	for (int i = 0; i < count; ++i)
 	{
-		playerBulletMap.insert({ createPlayerBulletCount, new PlayerBullet(sf::Vector2f::zero, 50.f, "Bullet",std::to_string(currentPlayerBulletIndex)) });
+		playerBulletMap.insert({ createPlayerBulletCount, new PlayerBullet(sf::Vector2f::zero, 50.f, name,std::to_string(currentPlayerBulletIndex)) });
 		playerBulletMap[createPlayerBulletCount]->CreateCollider(ColliderType::Circle, ColliderLayer::PlayerBullet, sf::Vector2f::zero);
 		playerBulletMap[createPlayerBulletCount++]->SetActive(false);
 	}

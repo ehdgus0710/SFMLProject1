@@ -143,7 +143,7 @@ void Player::Attack()
 	bullet->SetOwner(this);
 	bullet->SetDamage(playerStat.damege);
 	bullet->Reset();
-	bullet->SetBulletSpeed(400.f);
+	bullet->SetBulletSpeed(800.f);
 	bullet->SetDir(sf::Vector2f::up);
 	bullet->SetActive(true);
 
