@@ -5,6 +5,10 @@
 #include "Test.h"
 #include "Bullet.h"
 
+#include "Player.h"
+#include "BulletManager.h"
+#include "Enemy.h"
+
 void SceneDev1::ResourcesLoad()
 {
 	TEXTURE_MANAGER.Load("player", "graphics/player.png");
@@ -20,19 +24,24 @@ void SceneDev1::Init()
 
 void SceneDev1::Enter()
 {
-	GameObject* obj = AddGameObject(new SpriteGameObject("player"));
+	Player* obj = AddGameObject(new Player(Stat(5, 500.f, 0.5f, 1), "player"));
 
 	obj->SetOrigin(Origins::MiddleCenter);
 	obj->SetPosition({ 1920.f * 0.5f, 1080 * 0.5f });
-	obj->CreateCollider(ColliderType::Rectangle, ColliderLayer::Player);
+	obj->CreateCollider(ColliderType::Circle, ColliderLayer::Player, sf::Vector2f::zero, { 0.5f,0.5f });
+	obj->SetActive(true);
 
-	obj = AddGameObject(new UITextGameObject("fonts/KOMIKAP_.ttf", "", 100));
-	obj->SetOrigin(Origins::TopLeft);
-	obj->SetPosition({ });
-	((UITextGameObject*)obj)->SetString("SceneDev1");
+	Enemy* enemy = AddGameObject(new Enemy("Enemy", Stat(5, 500.f, 0.5f, 1) ));
+	enemy->CreateCollider(ColliderType::Circle, ColliderLayer::Enemy, sf::Vector2f::zero, { 0.5f,0.5f });
+	enemy->SetOrigin(Origins::MiddleCenter);
+	enemy->SetPosition({ 1920.f * 0.5f, 300.f });
+	enemy->SetAttackPattern(0);
+	enemy->SetActive(true);
+	enemy->SetPlayer(obj);
 
-	Test* test = AddGameObject(new Test("player"));
-	test->CreateCollider(ColliderType::Rectangle, ColliderLayer::Player);
+	BulletManager::GetInstance().CreateEnemyBullet("Bullet", 1);
+
+	ColliderManager::GetInstance().SetCollisionCheck(ColliderLayer::Player, ColliderLayer::EnemyBullet);
 
 	Scene::Enter();
 }

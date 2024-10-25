@@ -29,8 +29,8 @@ void Framework::Update()
             InputManager::GetInstance().UpdateEvent(&event);
         }
 
-        SceneManager::GetInstance().Update(TimeManager::GetInstance().GetDeletaTime());
         ColliderManager::GetInstance().Update();
+        SceneManager::GetInstance().Update(TimeManager::GetInstance().GetDeletaTime());
 
         renderWindow->clear();
         SceneManager::GetInstance().Render(*renderWindow);

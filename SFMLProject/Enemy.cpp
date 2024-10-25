@@ -76,7 +76,7 @@ void Enemy::Attack1()
 	bullet->SetBulletSpeed(400.f);
 	bullet->SetActive(true);
 
-	currentReloadTime = attackOneReloadTime;
+	currentReloadTime = 3;
 }
 
 void Enemy::Attack2()
