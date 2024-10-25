@@ -13,6 +13,9 @@ CollisionCircle::CollisionCircle(float radian)
 
 CollisionCircle::~CollisionCircle()
 {
+
+
+
 }
 
 void CollisionCircle::Init()

@@ -94,6 +94,9 @@ void SceneDev2::Enter()
 	scoreText->SetPosition({ 10.f, 980.f });
 
 	Scene::Enter();
+
+
+
 }
 
 void SceneDev2::Exit()
