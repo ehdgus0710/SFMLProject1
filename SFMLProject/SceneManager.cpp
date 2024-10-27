@@ -29,6 +29,11 @@ void SceneManager::Release()
 	sceneVec.clear();
 }
 
+void SceneManager::Destory()
+{
+	sceneVec[(int)currentScene]->Destory();
+}
+
 void SceneManager::ChangeScene(SceneIds id)
 {
 	sceneVec[(int)currentScene]->Exit();

@@ -94,7 +94,7 @@ void Player::PlayerMove(float deltaTime)
 
 	if (direction.x == 0.f && direction.y == 0.f)
 		return;
-
+	
 	direction.Normalized();
 	position.x += direction.x * playerStat.GetSpeed() * deltaTime;
 	position.y += direction.y * playerStat.GetSpeed() * deltaTime;

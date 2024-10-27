@@ -15,6 +15,7 @@ public:
 
 	virtual void Init() = 0;
 	virtual void Release() = 0;
+	virtual void Destory();
 
 	virtual void Enter();
 	virtual void Exit();

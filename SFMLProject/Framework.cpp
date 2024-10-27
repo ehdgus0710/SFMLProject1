@@ -6,6 +6,8 @@
 
 void Framework::Init()
 {
+    WindowManager::GetInstance().init({ 1920, 1080 }, "haha");
+    auto renderWindow = WindowManager::GetInstance().GetRenderWindow();
     renderWindow = WindowManager::GetInstance().GetRenderWindow();
 
     InputManager::GetInstance().Init();
@@ -18,6 +20,7 @@ void Framework::Update()
 {
     while (renderWindow->isOpen())
     {
+        SceneManager::GetInstance().Destory();
         InputManager::GetInstance().UpKeyClear();
         TimeManager::GetInstance().Update();
 
@@ -29,8 +32,8 @@ void Framework::Update()
             InputManager::GetInstance().UpdateEvent(&event);
         }
 
-        ColliderManager::GetInstance().Update();
         SceneManager::GetInstance().Update(TimeManager::GetInstance().GetDeletaTime());
+        ColliderManager::GetInstance().Update();
 
         renderWindow->clear();
         SceneManager::GetInstance().Render(*renderWindow);

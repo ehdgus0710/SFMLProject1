@@ -70,7 +70,6 @@ public:
     explicit Vector2(const Vector2<U>& vector);
 
 
-
     Vector2& operator=(const Vector2& lhs)
     {
         x = lhs.x;
@@ -90,8 +89,6 @@ public:
     {
         return (T)sqrt(x * x + y * y);
     }
-
-
 
     static float Dot(const Vector2<T>& lhs, const Vector2<T>& rhs);
     static Vector2<T> Lerp(const Vector2<T>& startPosition, const Vector2<T>& destination, float time);

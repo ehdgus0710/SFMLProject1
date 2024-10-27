@@ -41,7 +41,8 @@ void SceneDev1::Enter()
 
 	BulletManager::GetInstance().CreateEnemyBullet("Bullet", 1);
 
-	ColliderManager::GetInstance().SetCollisionCheck(ColliderLayer::Player, ColliderLayer::EnemyBullet);
+	//ColliderManager::GetInstance().SetCollisionCheck(ColliderLayer::Player, ColliderLayer::Enemy);
+	//ColliderManager::GetInstance().SetCollisionCheck(ColliderLayer::Player, ColliderLayer::EnemyBullet);
 
 	Scene::Enter();
 }

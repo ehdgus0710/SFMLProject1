@@ -13,6 +13,7 @@ protected:
 public:
 	void Init();
 	void Release();
+	void Destory();
 
 	Scene* GetCurrentScene() { return sceneVec[(int)currentScene]; }
 	SceneIds GetCurrentSceneId() const { return currentScene; }

@@ -67,6 +67,7 @@ void Enemy::Attack1()
 	EnemyBullet* bullet = BulletManager::GetInstance().GetEnemyBulletToAEnabled();
 	sf::Vector2f direction = player->GetPosition() - position;
 
+	bullet->SetDestory(false);
 	bullet->SetPosition(position);
 	direction.Normalized();
 	bullet->SetDamage(enemyStat.damege);

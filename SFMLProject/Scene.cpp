@@ -25,6 +25,16 @@ void Scene::Release()
 	removeObjectVector.clear();
 }
 
+void Scene::Destory()
+{
+	for (auto& object : removeObjectVector)
+	{
+		object->SetActive(false);
+		gameObjectList.remove(object);
+	}
+	removeObjectVector.clear();
+}
+
 void Scene::Enter()
 {
 	for (auto object : gameObjectList)
@@ -40,14 +50,6 @@ void Scene::Exit()
 
 void Scene::Update(float deltaTime)
 {
-	for (auto object : removeObjectVector)
-	{
-		object->SetActive(false);
-		object->SetDestory(false); 
-		gameObjectList.remove(object);
-	}
-	removeObjectVector.clear();
-
 	for (auto object : gameObjectList)
 	{
 		if (!object->IsActive())

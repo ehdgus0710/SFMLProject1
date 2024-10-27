@@ -4,8 +4,6 @@
 int main()
 {
     Framework framework;
-    WindowManager::GetInstance().init({ 1920, 1080 }, "haha");
-    auto renderWindow = WindowManager::GetInstance().GetRenderWindow();
     
     framework.Init();
     framework.Update();

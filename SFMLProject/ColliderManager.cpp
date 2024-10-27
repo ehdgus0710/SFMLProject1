@@ -56,8 +56,8 @@ void ColliderManager::LayerCollision(int left, int right)
     {
         for (int j = 0; j < rightSize; ++j)
         {
-            if (!colliderVector[left][i]->GetActive() || !colliderVector[right][j]->GetActive())
-                continue;
+            //if (!colliderVector[left][i]->GetActive() || !colliderVector[right][j]->GetActive())
+            //    continue;
 
             auto leftID = colliderVector[left][i]->GetID() < colliderVector[right][j]->GetID() ? colliderVector[left][i]->GetID() : colliderVector[right][j]->GetID();
             auto rightID = colliderVector[left][i]->GetID() < colliderVector[right][j]->GetID() ? colliderVector[right][j]->GetID() : colliderVector[left][i]->GetID();
@@ -70,12 +70,17 @@ void ColliderManager::LayerCollision(int left, int right)
                 iter = collisionMap.find(hash);
             }
 
-            if (!colliderVector[left][i]->GetDestory() 
-                && !colliderVector[right][j]->GetDestory() 
-                && CheckCollision(colliderVector[left][i], colliderVector[right][j]))
+            if (CheckCollision(colliderVector[left][i], colliderVector[right][j]))
             {
+                // 사망 예정 오브젝트
+                if (colliderVector[left][i]->GetDestory() || colliderVector[right][i]->GetDestory())
+                {
+                    colliderVector[left][i]->OnCollisionEnd(colliderVector[right][j]);
+                    colliderVector[right][j]->OnCollisionEnd(colliderVector[left][i]);
+                    iter->second = false;
+                }
                 // 충돌하지 않음
-                if (!iter->second)
+                else if (!iter->second)
                 {
                     colliderVector[left][i]->OnCollisionEnter(colliderVector[right][j]);
                     colliderVector[right][j]->OnCollisionEnter(colliderVector[left][i]);
