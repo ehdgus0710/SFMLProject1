@@ -4,7 +4,6 @@
 
 CollisionRectangle::CollisionRectangle(sf::Vector2f size)
 	: rectangleSize(size)
-	, rectanglePosition(size)
 	, Collision(ColliderType::Rectangle)
 	, rectanleRender(size)
 {
@@ -43,7 +42,6 @@ void CollisionRectangle::Render(sf::RenderWindow& renderWindow)
 void CollisionRectangle::SetSize(sf::Vector2f size)
 {
 	rectangleSize = size;
-	rectanglePosition.SetSize(size);
 }
 
 void CollisionRectangle::SetPosition(const sf::Vector2f& pos)

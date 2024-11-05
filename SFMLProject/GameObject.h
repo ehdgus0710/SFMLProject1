@@ -17,7 +17,7 @@ public:
 	void Awake() override;
 	void Start() override;
 
-	virtual void Init();
+	virtual void Init(); 
 	virtual void Release();
 	virtual void Reset();
 

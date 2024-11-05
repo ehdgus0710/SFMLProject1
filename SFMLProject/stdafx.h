@@ -6,6 +6,8 @@
 #include<iostream>
 #include <time.h>
 #include <math.h>
+#include <functional>
+#include <random>
 
 // 자료구조
 #include <unordered_map>

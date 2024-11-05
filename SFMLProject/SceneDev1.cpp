@@ -50,7 +50,7 @@ void SceneDev1::Enter()
 void SceneDev1::Exit()
 {
 	TEXTURE_MANAGER.unLoad("player");
-	ColliderManager::GetInstance().Release();
+	ColliderManager::GetInstance().Clear();
 	Scene::Exit();
 }
 

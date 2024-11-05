@@ -9,6 +9,16 @@
 
 ColliderManager::ColliderManager()
 {
+    collisionCheckVector.clear();
+    colliderVector.clear();
+
+    colliderVector.resize((int)ColliderLayer::End);
+    collisionCheckVector.resize((int)ColliderLayer::End);
+
+    for (int i = 0; i < (int)ColliderLayer::End; ++i)
+    {
+        collisionCheckVector[i].resize((int)ColliderLayer::End);
+    }
 }
 
 void ColliderManager::Init()
@@ -17,8 +27,8 @@ void ColliderManager::Init()
     colliderVector.clear();
 
     colliderVector.resize((int)ColliderLayer::End);
-
     collisionCheckVector.resize((int)ColliderLayer::End);
+
     for (int i = 0; i < (int)ColliderLayer::End; ++i)
     {
         collisionCheckVector[i].resize((int)ColliderLayer::End);
@@ -27,6 +37,7 @@ void ColliderManager::Init()
 
 void ColliderManager::Update()
 {
+
     for (int i = 0; i < (int)ColliderLayer::End; ++i)
     {
         for (int j = i; j < (int)ColliderLayer::End; ++j)
@@ -40,11 +51,38 @@ void ColliderManager::Update()
 
 }
 
-void ColliderManager::Release()
+void ColliderManager::Clear()
 {
     colliderVector.clear();
     collisionCheckVector.clear();
     Init();
+}
+
+void ColliderManager::DestoryColliderCheck()
+{
+    for (auto& destoryCollider : destoryVector)
+    {
+        auto targetVector = destoryCollider->GetCollisionTarget();
+
+        for (auto& targetCollider : targetVector)
+        {
+            auto leftID = destoryCollider->GetID() < targetCollider->GetID() ? destoryCollider->GetID() : targetCollider->GetID();
+            auto rightID = destoryCollider->GetID() < targetCollider->GetID() ? targetCollider->GetID() : destoryCollider->GetID();
+            std::string hash = std::to_string(leftID) + "," + std::to_string(rightID);
+
+            auto iter = collisionMap.find(hash);
+            if (iter == collisionMap.end())
+                continue;
+
+            destoryCollider->OnCollisionEnd(targetCollider);
+            targetCollider->OnCollisionEnd(destoryCollider);
+            iter->second = false;
+        }
+
+        targetVector.clear();
+    }
+
+    destoryVector.clear();
 }
 
 void ColliderManager::LayerCollision(int left, int right)
@@ -56,8 +94,8 @@ void ColliderManager::LayerCollision(int left, int right)
     {
         for (int j = 0; j < rightSize; ++j)
         {
-            //if (!colliderVector[left][i]->GetActive() || !colliderVector[right][j]->GetActive())
-            //    continue;
+            if (!colliderVector[left][i]->GetActive() || !colliderVector[right][j]->GetActive())
+                continue;
 
             auto leftID = colliderVector[left][i]->GetID() < colliderVector[right][j]->GetID() ? colliderVector[left][i]->GetID() : colliderVector[right][j]->GetID();
             auto rightID = colliderVector[left][i]->GetID() < colliderVector[right][j]->GetID() ? colliderVector[right][j]->GetID() : colliderVector[left][i]->GetID();
@@ -72,15 +110,8 @@ void ColliderManager::LayerCollision(int left, int right)
 
             if (CheckCollision(colliderVector[left][i], colliderVector[right][j]))
             {
-                // 사망 예정 오브젝트
-                if (colliderVector[left][i]->GetDestory() || colliderVector[right][i]->GetDestory())
-                {
-                    colliderVector[left][i]->OnCollisionEnd(colliderVector[right][j]);
-                    colliderVector[right][j]->OnCollisionEnd(colliderVector[left][i]);
-                    iter->second = false;
-                }
                 // 충돌하지 않음
-                else if (!iter->second)
+                if (!iter->second)
                 {
                     colliderVector[left][i]->OnCollisionEnter(colliderVector[right][j]);
                     colliderVector[right][j]->OnCollisionEnter(colliderVector[left][i]);
@@ -113,22 +144,20 @@ bool ColliderManager::CheckCollision(Collider* left, Collider* right)
     {
         if (right->GetColliderType() == ColliderType::Rectangle)
             return IsRectToRectCollision(left, right);
-        //else if (right->GetColliderType() == ColliderType::Circle)
-        //    return IsCircleToRectCollision(right, left);
-        //else
-        //    return IsPointToRectCollision(right, left);
+        else if (right->GetColliderType() == ColliderType::Circle)
+            return IsCircleToRectCollision(right, left);
+        else
+            return IsPointToRectCollision(right, left);
 
     }
     else if (left->GetColliderType() == ColliderType::Circle)
     {
-        if (right->GetColliderType() == ColliderType::Circle)
+        if (right->GetColliderType() == ColliderType::Rectangle)
+            return IsCircleToRectCollision(left, right);
+        else if (right->GetColliderType() == ColliderType::Circle)
             return IsCircleToCircleCollision(left, right);
-        //if (right->GetColliderType() == ColliderType::Rectangle)
-        //    return IsCircleToRectCollision(left, right);
-        //else if (right->GetColliderType() == ColliderType::Circle)
-        //    return IsCircleToCircleCollision(left, right);
-        //else
-        //    return IsCircleToPointCollision(left, right);
+        else
+            return IsCircleToPointCollision(left, right);
     }
     else
     {
@@ -149,10 +178,9 @@ void ColliderManager::SetCollisionCheck(ColliderLayer left, ColliderLayer right)
     collisionCheckVector[(int)right][(int)left] = true;
 }
 
-void ColliderManager::AddCollider(Collider* newCollision, ColliderLayer layer)
+void ColliderManager::AddCollider(Collider* newCollision, ColliderLayer colliderLayer)
 {
-    colliderVector[(int)layer].push_back(newCollision);
-    //vectorSize = (int)colliderVector.size();
+    colliderVector[(int)colliderLayer].push_back(newCollision);
 }
 
 bool ColliderManager::IsPointToPointCollision(Collider* left, Collider* right)
@@ -164,9 +192,9 @@ bool ColliderManager::IsPointToPointCollision(Collider* left, Collider* right)
 
 bool ColliderManager::IsCircleToCircleCollision(Collider* left, Collider* right)
 {
-    float distance = sf::Vector2f::SqrMagnitude(left->GetCollision()->GetPosition(), right->GetCollision()->GetPosition());
+    float distance = sf::Vector2f::Distance(left->GetCollision()->GetPosition(), right->GetCollision()->GetPosition());
     float lenght = ((CollisionCircle*)left->GetCollision())->GetRadian() + ((CollisionCircle*)right->GetCollision())->GetRadian();
-    return distance < lenght * lenght ? true : false;
+    return distance < lenght ? true : false;
 }
 
 bool ColliderManager::IsRectToRectCollision(Collider* left, Collider* right)
@@ -202,44 +230,34 @@ bool ColliderManager::IsRectToRectCollision(Collider* left, Collider* right)
 }
 bool ColliderManager::IsCircleToRectCollision(Collider* left, Collider* right)
 {
-    //sf::Vector2f circlePosition = left->GetCollision()->GetPosition();
-    //sf::Vector2f rectanglePosition = right->GetCollision()->GetPosition();
-    //float radian = ((CollisionCircle*)left->GetCollision())->GetRadian();
+    sf::Vector2f circlePosition = left->GetCollision()->GetPosition();
+    sf::Vector2f rectanglePosition = right->GetCollision()->GetPosition();
+    float radian = ((CollisionCircle*)left->GetCollision())->GetRadian();
+    Rectangle rightRect = ((CollisionRectangle*)right->GetCollision())->GetRectangle();
 
-    //CollisionRectangle* rectangleCollision = (CollisionRectangle*)right->GetCollision();
-    //sf::Vector2f distance = sf::Vector2f::Distance(circlePosition, rectanglePosition);
-    //sf::Vector2f rectangleSize = rectangleCollision->GetScale() * 0.5f;
+    if ((rightRect.leftPosition <= circlePosition.x && rightRect.rightPosition >= circlePosition.x)
+        || (rightRect.topPosition <= circlePosition.y && rightRect.bottomPosition >= circlePosition.y))
+    {
+        rightRect.leftPosition -= radian;
+        rightRect.rightPosition += radian;
+        rightRect.topPosition -= radian;
+        rightRect.bottomPosition += radian;
 
-
-    //if (circlePosition.x < rectanglePosition.x)
-    //{
-    //    if (circlePosition.y < rectanglePosition.y)
-    //    {
-    //        //  x 음수, y 는 양수
-    //        return distance.x < (rectangleSize.x + radian) * -1.f && distance.y < rectangleSize.y + radian;
-    //    }
-    //    else
-    //    {
-    //        //  x 음수, y 는 음수
-    //        distance = rectangleCollision->GetLeftTopPosition() - rectanglePosition;
-    //        return distance.x < (rectangleSize.x + radian) * -1.f && distance.y < (rectangleSize.y + radian) * -1.f;
-    //    }
-    //}
-    //else
-    //{
-    //    if (circlePosition.y < rectanglePosition.y)
-    //    {
-    //        // x 양수,  y 는 음수
-    //        distance = rectangleCollision->GetRightTopPosition() - rectanglePosition;
-    //        return distance.x < rectangleSize.x + radian && distance.y < (rectangleSize.y + radian) * -1.f;
-    //    }
-    //    else
-    //    {
-    //        // x 양수,  y 는 양수
-    //        distance = rectangleCollision->GetRightBottomPosition() - rectanglePosition;
-    //        return distance.x < rectangleSize.x + radian && distance.y < rectangleSize.y + radian;
-    //    }
-    //}
+        if (rightRect.leftPosition < circlePosition.x && rightRect.rightPosition > circlePosition.x
+            && rightRect.topPosition < circlePosition.y && rightRect.bottomPosition > circlePosition.y)
+            return true;
+    }
+    else
+    {
+        if (IsCircleToPointCollision(circlePosition, radian, { rightRect.leftPosition , rightRect.topPosition }))
+            return true;
+        if (IsCircleToPointCollision(circlePosition, radian, { rightRect.leftPosition , rightRect.bottomPosition }))
+            return true;
+        if (IsCircleToPointCollision(circlePosition, radian, { rightRect.rightPosition , rightRect.topPosition }))
+            return true;
+        if (IsCircleToPointCollision(circlePosition, radian, { rightRect.rightPosition , rightRect.bottomPosition }))
+            return true;
+    }
 
     return false;
 }
@@ -249,13 +267,19 @@ bool ColliderManager::IsPointToRectCollision(Collider* left, Collider* right)
     sf::Vector2f distance = left->GetCollision()->GetPosition() - right->GetCollision()->GetPosition();
     sf::Vector2f rectangleSize = ((CollisionRectangle*)right->GetCollision())->GetScale() * 0.5f;
 
-    return distance.x < rectangleSize.x&& distance.y < rectangleSize.y;
+    return distance.x < rectangleSize.x && distance.y < rectangleSize.y;
 }
 
 bool ColliderManager::IsCircleToPointCollision(Collider* left, Collider* right)
 {
     float distance = sf::Vector2f::Distance(left->GetCollision()->GetPosition(), right->GetCollision()->GetPosition());
     float radian = ((CollisionCircle*)left->GetCollision())->GetRadian();
+
+    return distance < radian ? true : false;
+}
+bool ColliderManager::IsCircleToPointCollision(sf::Vector2f circlePosition, float radian, sf::Vector2f pointPosition)
+{
+    float distance = sf::Vector2f::Distance(circlePosition, pointPosition);
 
     return distance < radian ? true : false;
 }

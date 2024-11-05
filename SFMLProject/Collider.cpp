@@ -72,6 +72,8 @@ void Collider::OnCollisionEnter(Collider* target)
 {
 	collision->IsCollision();
 	owner->OnCollisionEnter(target);
+
+	collisionTagetVector.push_back(target);
 }
 
 void Collider::OnCollisionStay(Collider* target)
@@ -83,6 +85,9 @@ void Collider::OnCollisionEnd(Collider* target)
 {
 	collision->EndCollision();
 	owner->OnCollisionEnd(target);
+
+	if (!isDestory)
+		collisionTagetVector.erase(std::find(collisionTagetVector.begin(), collisionTagetVector.end(), target));
 }
 
 ColliderType Collider::GetColliderType()

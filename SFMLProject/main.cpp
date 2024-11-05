@@ -1,6 +1,7 @@
 ﻿#include "stdafx.h"
 #include "Core.h"
 #include "Framework.h"
+
 int main()
 {
     Framework framework;

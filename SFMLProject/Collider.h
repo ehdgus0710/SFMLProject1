@@ -17,6 +17,7 @@ private:
 	bool			active;
 	bool			isDestory;
 
+	std::vector<Collider*> collisionTagetVector;
 public:
 	Collision* GetCollision() const { return collision; }
 	ColliderType GetColliderType();
@@ -24,9 +25,9 @@ public:
 
 	ColliderLayer GetColliderLayer() { return colliderLayer; }
 
-	void SetActive(bool active) { this->active = active; }
+	void SetActive(bool active) { this->active = active; isDestory = active;	}
 	bool GetActive() const { return active; }
-	void SetDestory(bool destory) { isDestory = destory; }
+	void SetDestory(bool destory) { isDestory = destory; active = destory; }
 	bool GetDestory() { return isDestory; }
 
 	void SetOrigin(sf::Vector2f origin);
@@ -38,6 +39,9 @@ public:
 
 	void SetOwner(GameObject* owner) { this->owner = owner; }
 	GameObject* GetOwner() { return owner; }
+
+
+	const std::vector<Collider*>& GetCollisionTarget() { return collisionTagetVector; }
 public:
 
 	void CreateCollision(ColliderType colliderType, ColliderLayer layer, sf::Vector2f offset = sf::Vector2f::zero, sf::Vector2f size = sf::Vector2f::one);

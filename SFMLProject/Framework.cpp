@@ -7,7 +7,6 @@
 void Framework::Init()
 {
     WindowManager::GetInstance().init({ 1920, 1080 }, "haha");
-    auto renderWindow = WindowManager::GetInstance().GetRenderWindow();
     renderWindow = WindowManager::GetInstance().GetRenderWindow();
 
     InputManager::GetInstance().Init();

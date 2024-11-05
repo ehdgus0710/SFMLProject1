@@ -105,7 +105,7 @@ void SceneDev2::Exit()
 
 	EnemyManager::GetInstance().Release();
 	BulletManager::GetInstance().Release();
-	ColliderManager::GetInstance().Release();
+	ColliderManager::GetInstance().Clear();
 	GameManager::GetInstance().Release();
 
 	Scene::Exit();

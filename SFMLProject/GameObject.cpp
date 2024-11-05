@@ -6,6 +6,7 @@ GameObject::GameObject(const std::string& name)
 	: name(name)
 	, originPreset(Origins::MiddleCenter)
 	, collider(nullptr)
+	, isDestory(false)
 {
 }
 
@@ -23,9 +24,11 @@ GameObject::GameObject(const GameObject& other)
 	, origin(other.origin)
 	, originPreset(other.originPreset)
 	, active(other.active)
-
-
+	, collider(other.collider)
+	, isDestory(other.isDestory)
 {
+	//collider = new Collider(other.collider->GetColliderType(), other.collider->GetColliderLayer());
+
 }
 
 void GameObject::SetPosition(const sf::Vector2f& pos)
@@ -104,9 +107,9 @@ void GameObject::OnCollisionEnd(Collider* target)
 void GameObject::SetDestory(bool destory)
 {
 	isDestory = destory;
-	if (collider != nullptr)
+	if (destory && collider != nullptr)
 	{
-		collider->SetDestory(destory);
+		collider->SetDestory(isDestory);
 	}
 }
 
